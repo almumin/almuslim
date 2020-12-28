@@ -1,3 +1,4 @@
+import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/widgets/home-heading-with-content.dart';
 import 'package:almuslim/widgets/home-icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -67,18 +68,25 @@ class HomeView extends StatelessWidget {
                     HomeIcon(
                       iconPath: "praying-mat.png",
                       text: "Prayer",
+                      onTapRun: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Prayer()))
+                      },
                     ),
                     HomeIcon(
                       iconPath: "reading-quran.png",
                       text: "Quran",
+                      onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "dua-hands.png",
                       text: "Duas",
+                      onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "halal-sign.png",
                       text: "Halal",
+                      onTapRun: () => {},
                     ),
                   ],
                 ),
@@ -87,18 +95,22 @@ class HomeView extends StatelessWidget {
                     HomeIcon(
                       iconPath: "holy-quran.png",
                       text: "Hadith",
+                      onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "qibla-compass.png",
                       text: "Qibla",
+                      onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "arabic-art.png",
                       text: "Some other",
+                      onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "palm-tree-with-date.png",
                       text: "Reminder",
+                      onTapRun: () => {},
                     ),
                   ],
                 )
@@ -123,5 +135,3 @@ class HomeView extends StatelessWidget {
         ]));
   }
 }
-
-
