@@ -1,4 +1,4 @@
-import 'package:almuslim/widgets/home.dart';
+import 'file:///D:/App/almuslim/lib/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {

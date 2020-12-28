@@ -1,16 +1,17 @@
-# almuslim
+# Almuslim
 
 A religious app for the practicing muslims.
 
-## Getting Started
+Upcoming features
 
-This project is a starting point for a Flutter application.
+    - Quran in Arabic and translation
+    - Hadith database
+    - Duas
+    - And many more
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Copyright of the images
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The images are downloaded from freepik.com & flaticon.com with free licence. Please use your own images to resolve copyright issue with the images
+
+
