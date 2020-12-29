@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               top: 60,
               child: Text(
-                today.hour.toString() + ":"+ today.minute.toString().padLeft(2, "0"),
+                today.hour.toString().padLeft(2, "0") + ":"+ today.minute.toString().padLeft(2, "0"),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.black87,
@@ -82,7 +82,7 @@ class HomeView extends StatelessWidget {
                 Row(
                   children: [
                     HomeIcon(
-                      iconPath: "praying-mat.png",
+                      iconPath: "013-prayer-mat.png",
                       text: "Prayer",
                       onTapRun: () => {
                         Navigator.push(context,
@@ -90,7 +90,7 @@ class HomeView extends StatelessWidget {
                       },
                     ),
                     HomeIcon(
-                      iconPath: "reading-quran.png",
+                      iconPath: "005-Quran.png",
                       text: "Quran",
                       onTapRun: () => {
                         Navigator.push(context,
@@ -112,7 +112,7 @@ class HomeView extends StatelessWidget {
                 Row(
                   children: [
                     HomeIcon(
-                      iconPath: "holy-quran.png",
+                      iconPath: "003-candle.png",
                       text: "Hadith",
                       onTapRun: () => {},
                     ),
@@ -127,7 +127,7 @@ class HomeView extends StatelessWidget {
                       onTapRun: () => {},
                     ),
                     HomeIcon(
-                      iconPath: "palm-tree-with-date.png",
+                      iconPath: "023-date-palm.png",
                       text: "Reminder",
                       onTapRun: () => {},
                     ),
