@@ -24,7 +24,7 @@ class PrayerColumn extends StatelessWidget {
             ),
             Container(
               child: Text(
-                waqtPrayerTime.hour.toString() + ":"+ waqtPrayerTime.minute.toString(),
+                waqtPrayerTime.hour.toString() + ":"+ waqtPrayerTime.minute.toString().padLeft(2, "0"),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
               ),

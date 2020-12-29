@@ -1,4 +1,5 @@
 import 'package:almuslim/screens/prayer.dart';
+import 'package:almuslim/screens/quran.dart';
 import 'package:almuslim/widgets/home-heading-with-content.dart';
 import 'package:almuslim/widgets/home-icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:hijri/hijri_calendar.dart';
 
 class HomeView extends StatelessWidget {
   HijriCalendar _hijriToday = new HijriCalendar.now();
+  DateTime today = new DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -45,17 +47,31 @@ class HomeView extends StatelessWidget {
                 fit: BoxFit.fitWidth,
               ),
             ),
-            Container(
+            Positioned(
               width: MediaQuery.of(context).size.width,
+              top: 60,
               child: Text(
-                "8:31PM",
+                today.hour.toString() + ":"+ today.minute.toString().padLeft(2, "0"),
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black87,
                     fontSize: 48,
                     fontWeight: FontWeight.bold),
               ),
-            )
+            ),
+            Positioned(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.location_pin,
+                    size: 16,
+                  ),
+                  Text("Tampere"),
+                ],
+              ),
+              top: 10,
+              left: 10,
+            ),
           ]),
           SizedBox(
             height: 16,
@@ -76,7 +92,10 @@ class HomeView extends StatelessWidget {
                     HomeIcon(
                       iconPath: "reading-quran.png",
                       text: "Quran",
-                      onTapRun: () => {},
+                      onTapRun: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => QuranHome()))
+                      },
                     ),
                     HomeIcon(
                       iconPath: "dua-hands.png",
