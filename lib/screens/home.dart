@@ -5,10 +5,11 @@ import 'package:almuslim/widgets/home-icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
 
 class HomeView extends StatelessWidget {
   HijriCalendar _hijriToday = new HijriCalendar.now();
-  DateTime today = new DateTime.now();
+  DateTime today = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class HomeView extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "Sunday, 27 December 2020",
+                    "${today.day} ${today.month} ${today.year}",
                     textAlign: TextAlign.center,
                     style:
                         TextStyle(color: Colors.amber.shade900, fontSize: 12),

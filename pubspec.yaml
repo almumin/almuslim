@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   hijri: ^2.0.3
   adhan: ^1.1.13
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
