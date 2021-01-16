@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:almuslim/models/surahs.dart';
+import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -29,13 +30,21 @@ class DBProvider {
 
   Future<Database> _initialize() async {
     Directory docDir = await getApplicationDocumentsDirectory();
-    String path = join(docDir.path, "db/quran_basic.db");
+    String path = join(docDir.path, "working_data.db");
+
+    ByteData data = await rootBundle.load(join("db", "quran_basic.db"));
+    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    await new File(path).writeAsBytes(bytes);
+
     Database db = await openDatabase(
       path,
       version: 1,
       onOpen: (db){
+        print(docDir.path);
         print('opened Database');
       }
     );
+
+    return db;
   }
 }

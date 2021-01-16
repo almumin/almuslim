@@ -1,5 +1,9 @@
+import 'package:almuslim/data/quran.dart';
+import 'package:almuslim/models/surahs.dart';
+import 'package:almuslim/widgets/surahs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class QuranHome extends StatefulWidget {
   @override
@@ -24,23 +28,28 @@ class _QuranHomeState extends State<QuranHome>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Quran"),
-        backgroundColor: Colors.blueGrey.shade900,
-        bottom: new TabBar(controller: controller, tabs: [
-          new Tab(
-            icon: new Icon(Icons.menu_book_outlined),
-          ),
-          new Tab(
-            icon: new Icon(Icons.remove_red_eye_outlined),
-          ),
+    return Provider<DBProvider>(
+      create: (_) => DBProvider(),
+      dispose: (_, value) => value.dispose(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Quran"),
+          backgroundColor: Colors.blueGrey.shade900,
+          bottom: new TabBar(controller: controller, tabs: [
+            new Tab(
+              icon: new Icon(Icons.menu_book_outlined),
+            ),
+            new Tab(
+              icon: new Icon(Icons.remove_red_eye_outlined),
+            ),
+          ]),
+        ),
+        body: new TabBarView(controller: controller, children: [
+          //Text("Quran Home"),
+          SurahList(),
+          Text("Quran Secondary"),
         ]),
       ),
-      body: new TabBarView(controller: controller, children: [
-        Text("Quran Home"),
-        Text("Quran Secondary"),
-      ]),
     );
   }
 }
