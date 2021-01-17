@@ -50,7 +50,6 @@ class DBProvider {
       path,
       version: 1,
       onOpen: (db){
-        print(docDir.path);
         print('opened Database');
       }
     );

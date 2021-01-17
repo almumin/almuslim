@@ -30,7 +30,7 @@ class _QuranHomeState extends State<QuranHome>
   Widget build(BuildContext context) {
     return Provider<DBProvider>(
       create: (_) => DBProvider(),
-      dispose: (_, value) => value.dispose(),
+      //dispose: (_, value) => value.dispose(),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Quran"),

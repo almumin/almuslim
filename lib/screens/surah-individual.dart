@@ -21,19 +21,28 @@ class _SurahIndividualState extends State<SurahIndividual> {
   Widget build(BuildContext context) {
     return Provider<DBProvider>(
       create: (context) => DBProvider(),
-      dispose: (context, value) => value.dispose(),
+      //dispose: (context, value) => value.dispose(),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Surah"),
           backgroundColor: Colors.blueGrey.shade900,
         ),
-        body: new ListView(
-          scrollDirection: Axis.vertical,
+        body: ListView(
           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           controller: _controller,
           children: [
             Container(
-              child: Text("${widget.surah.latin}"),
+              color: Colors.grey.shade200,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                    "${widget.surah.id}. ${widget.surah.latin}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 20,),
             Container(child: SurahIndividualWithAyahs(surahInfo: widget.surah,)),
