@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:almuslim/models/ayah.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -20,6 +21,15 @@ class DBProvider {
     final db = await database;
     var res = await db.query('surahs');
     List<Surah> list = res.isNotEmpty ? res.map((e) => Surah.fromMap(e)).toList() : [];
+    return list;
+  }
+
+  Future<List<Ayah>> getAyahsForSurah(int surahID) async{
+    print("fetching starter");
+    final db = await database;
+    var res = await db.rawQuery('SELECT * FROM quran_text WHERE sura=?', [surahID]);
+    List<Ayah> list = res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
+    print("fetched data");
     return list;
   }
 

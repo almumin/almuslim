@@ -44,7 +44,10 @@ class _QuranHomeState extends State<QuranHome>
             ),
           ]),
         ),
-        body: new TabBarView(controller: controller, children: [
+        body: new TabBarView(
+            controller: controller,
+            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            children: [
           //Text("Quran Home"),
           SurahList(),
           Text("Quran Secondary"),

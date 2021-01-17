@@ -1,5 +1,6 @@
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/models/surahs.dart';
+import 'package:almuslim/screens/surah-individual.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +12,7 @@ class SurahList extends StatelessWidget {
     return FutureBuilder<List<Surah>>(
       future: dbProvider.getAllSurahs(),
       builder: (_, AsyncSnapshot<List<Surah>> snapshot) {
-        print(snapshot.hasData);
         print(snapshot.error.toString());
-
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
@@ -36,10 +35,23 @@ class SurahList extends StatelessWidget {
             itemCount: surahs.length,
             itemBuilder: (_, int index) {
               var surah = surahs[index];
-              return ListTile(
-                leading: Text(surah.id.toString()),
-                title: Text(surah.english),
-                trailing: Text(surah.numberOfAyah.toString()),
+              return InkWell(
+                onTap: () =>{
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SurahIndividual(surah: surahs[index],)))
+                },
+                child: ListTile(
+                  leading: Text(surah.id.toString()),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(surah.english),
+                      Text(surah.arabic),
+                    ],
+                  ),
+                  trailing: Text(surah.numberOfAyah.toString()),
+                ),
               );
             });
       },
