@@ -39,29 +39,32 @@ class SurahIndividualWithAyahs extends StatelessWidget {
         return ListView.builder(
             shrinkWrap: true,
             itemCount: ayahs.length,
+            physics: ClampingScrollPhysics(),
             itemBuilder: (_, int index) {
               var ayah = ayahs[index];
-              return ListTile(
-                title: Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        width: 1,
+              return InkWell(
+                onTap: () => {
+                  print(surahInfo.latin)
+                },
+                child: ListTile(
+                  title: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 1,
+                        )
                       )
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        "${ayah.text}",
-                        textDirection: TextDirection.rtl,
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w500
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                      child: Text(
+                            "${ayah.text}",
+                            textDirection: TextDirection.rtl,
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w500
+                            ),
+                          ),
+                    ),
                 ),
               );
             });

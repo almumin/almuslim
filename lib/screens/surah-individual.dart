@@ -45,7 +45,7 @@ class _SurahIndividualState extends State<SurahIndividual> {
               ),
             ),
             SizedBox(height: 20,),
-            Container(child: SurahIndividualWithAyahs(surahInfo: widget.surah,)),
+            SurahIndividualWithAyahs(surahInfo: widget.surah,),
           ],
         ),
       ),
