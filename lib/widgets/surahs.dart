@@ -41,7 +41,7 @@ class SurahList extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => SurahIndividual(surah: surahs[index],)))
                 },
                 child: ListTile(
-                  leading: Text(surah.id.toString()),
+                  leading: Text("${surah.id}."),
                   title: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
