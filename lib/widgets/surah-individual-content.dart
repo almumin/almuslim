@@ -1,4 +1,5 @@
 import 'package:almuslim/data/quran.dart';
+import 'package:almuslim/models/ayah-with-translation.dart';
 import 'package:almuslim/models/ayah.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,9 +14,12 @@ class SurahIndividualWithAyahs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dbProvider = Provider.of<DBProvider>(context);
-    return FutureBuilder<List<Ayah>>(
-      future: dbProvider.getAyahsForSurah(this.surahInfo.id),
-      builder: (_, AsyncSnapshot<List<Ayah>> snapshot) {
+    return FutureBuilder<List<AyahWithTranslationAndTransliteration>>(
+      //future: dbProvider.getAyahsForSurah(this.surahInfo.id),
+      future: dbProvider
+          .getAyahsWithTranslationAndTransliterationForSurah(this.surahInfo.id),
+      builder: (_,
+          AsyncSnapshot<List<AyahWithTranslationAndTransliteration>> snapshot) {
         print(snapshot.error.toString());
         if (!snapshot.hasData) {
           return Center(
@@ -43,28 +47,44 @@ class SurahIndividualWithAyahs extends StatelessWidget {
             itemBuilder: (_, int index) {
               var ayah = ayahs[index];
               return InkWell(
-                onTap: () => {
-                  print(surahInfo.latin)
-                },
+                onTap: () => {print(surahInfo.latin)},
                 child: ListTile(
                   title: Container(
                     decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 1,
-                        )
-                      )
-                    ),
-                      child: Text(
-                            "${ayah.text}",
-                            textDirection: TextDirection.rtl,
-                            softWrap: true,
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w500
-                            ),
+                        border: Border(
+                            bottom: BorderSide(
+                      width: 1,
+                              color: Colors.grey
+                    ))),
+                    child: Column(
+                      children: [
+                        Text(
+                          "${ayah.text}",
+                          textDirection: TextDirection.rtl,
+                          softWrap: true,
+                          style: TextStyle(
+                              fontSize: 26, fontWeight: FontWeight.w600),
+                        ),
+                        /*Text(
+                          "${ayah.transliteration}",
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 18,
                           ),
+                        ),*/
+                        Text(
+                          "${ayah.ayah}. ${ayah.translation}",
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
                     ),
+                  ),
                 ),
               );
             });

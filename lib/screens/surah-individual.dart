@@ -31,15 +31,43 @@ class _SurahIndividualState extends State<SurahIndividual> {
           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           controller: _controller,
           children: [
-            Container(
-              color: Colors.grey.shade200,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Text(
-                    "${widget.surah.id}. ${widget.surah.latin}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
+            Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32, top: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0XFF50bb64),
+                    borderRadius: BorderRadius.circular(15)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      Text(
+                          "${widget.surah.id}. ${widget.surah.latin}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        "${widget.surah.english}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        "Ayah: ${widget.surah.numberOfAyah}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
