@@ -16,8 +16,6 @@ class Prayer extends StatelessWidget {
       body: ListView(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height,
-            color: Colors.green.shade400,
             child: Column(
               children: [
                 PrayerHeading(headingTitle: "Prayer times",),
