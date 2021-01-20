@@ -99,8 +99,8 @@ class HomeView extends StatelessWidget {
                       },
                     ),
                     HomeIcon(
-                      iconPath: "dua-hands.png",
-                      text: "Duas",
+                      iconPath: "001-allah.png",
+                      text: "99 names",
                       onTapRun: () => {},
                     ),
                     HomeIcon(
@@ -123,8 +123,8 @@ class HomeView extends StatelessWidget {
                       onTapRun: () => {},
                     ),
                     HomeIcon(
-                      iconPath: "arabic-art.png",
-                      text: "Some other",
+                      iconPath: "dua-hands.png",
+                      text: "Duas",
                       onTapRun: () => {},
                     ),
                     HomeIcon(

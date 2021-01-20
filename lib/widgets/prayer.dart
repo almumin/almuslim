@@ -19,7 +19,7 @@ class PrayerColumn extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(
-              width: 15,
+              width: 5,
             ),
             Icon(icon),
             SizedBox(
@@ -38,7 +38,7 @@ class PrayerColumn extends StatelessWidget {
             ),
             Container(
               child: Text(
-                waqtPrayerTime.hour.toString() +
+                waqtPrayerTime.hour.toString().padLeft(2, "0") +
                     ":" +
                     waqtPrayerTime.minute.toString().padLeft(2, "0"),
                 textAlign: TextAlign.center,
@@ -48,6 +48,10 @@ class PrayerColumn extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
+            SizedBox(
+              width: 5,
+            ),
+            Icon(Icons.volume_off),
           ],
         ),
       ),
