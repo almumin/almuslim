@@ -10,20 +10,22 @@ class Prayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Prayer"),
+        title: Text("Prayer times"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
       body: ListView(
         children: [
           Container(
+            height: MediaQuery.of(context).size.height,
+            color: Colors.green.shade400,
             child: Column(
               children: [
                 PrayerHeading(headingTitle: "Prayer times",),
-                PrayerColumn(waqt: "Fajr", waqtPrayerTime: pTimes.fajr,),
-                PrayerColumn(waqt: "Duhr", waqtPrayerTime: pTimes.dhuhr,),
-                PrayerColumn(waqt: "Asr", waqtPrayerTime: pTimes.asr,),
-                PrayerColumn(waqt: "Maghrib", waqtPrayerTime: pTimes.maghrib,),
-                PrayerColumn(waqt: "Isha", waqtPrayerTime: pTimes.isha,),
+                PrayerColumn(waqt: "Fajr", waqtPrayerTime: pTimes.fajr, icon: Icons.wb_sunny_outlined,),
+                PrayerColumn(waqt: "Duhr", waqtPrayerTime: pTimes.dhuhr, icon: Icons.wb_sunny,),
+                PrayerColumn(waqt: "Asr", waqtPrayerTime: pTimes.asr, icon: Icons.cloud_outlined,),
+                PrayerColumn(waqt: "Maghrib", waqtPrayerTime: pTimes.maghrib, icon: Icons.wb_cloudy_rounded,),
+                PrayerColumn(waqt: "Isha", waqtPrayerTime: pTimes.isha, icon: Icons.wb_sunny,),
               ],
             ),
           )

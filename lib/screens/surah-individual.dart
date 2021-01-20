@@ -32,11 +32,11 @@ class _SurahIndividualState extends State<SurahIndividual> {
           controller: _controller,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 32, right: 32, top: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
               child: Container(
                 decoration: BoxDecoration(
                   color: Color(0XFF50bb64),
-                    borderRadius: BorderRadius.circular(15)
+                    borderRadius: BorderRadius.circular(8)
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

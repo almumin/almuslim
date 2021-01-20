@@ -58,12 +58,16 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                     ))),
                     child: Column(
                       children: [
-                        Text(
-                          "${ayah.text}",
-                          textDirection: TextDirection.rtl,
-                          softWrap: true,
-                          style: TextStyle(
-                              fontSize: 26, fontWeight: FontWeight.w600),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "${ayah.text}",
+                            textDirection: TextDirection.rtl,
+                            textAlign: TextAlign.right,
+                            softWrap: true,
+                            style: TextStyle(
+                                fontSize: 26, fontWeight: FontWeight.w600),
+                          ),
                         ),
                         /*Text(
                           "${ayah.transliteration}",
@@ -72,11 +76,14 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),*/
-                        Text(
-                          "${ayah.ayah}. ${ayah.translation}",
-                          softWrap: true,
-                          style: TextStyle(
-                            fontSize: 16,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "${ayah.ayah}. ${ayah.translation}",
+                            softWrap: true,
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                         SizedBox(
