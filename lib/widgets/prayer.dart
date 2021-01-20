@@ -58,7 +58,10 @@ class PrayerHeading extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Container(
-        color: Colors.grey.shade200,
+        decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(8)
+        ),
         width: MediaQuery.of(context).size.width,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
