@@ -68,8 +68,11 @@ class PrayerHeading extends StatelessWidget {
       padding: const EdgeInsets.all(18.0),
       child: Container(
         decoration: BoxDecoration(
-            //color: Colors.grey.shade300,
-            color: Color(0xFF69C4A2),
+            image: DecorationImage(
+              image: AssetImage("assets/icons/015-mosque.png"),
+              alignment: Alignment.centerRight,
+            ),
+            color: Color(0XFF50bb64),
             borderRadius: BorderRadius.circular(8)),
         width: MediaQuery.of(context).size.width,
         child: Padding(
@@ -81,7 +84,7 @@ class PrayerHeading extends StatelessWidget {
                   Text(
                     "20:31",
                     style: TextStyle(
-                        color: Colors.black87,
+                        color: Colors.white,
                         fontSize: 52,
                         fontWeight: FontWeight.w700),
                   ),
@@ -94,11 +97,15 @@ class PrayerHeading extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_pin,
+                    color: Colors.white,
                     size: 20,
                   ),
                   Text(
                     "Tampere, Finland",
-                    style: TextStyle(color: Colors.black87, fontSize: 20),
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 ],
               ),
