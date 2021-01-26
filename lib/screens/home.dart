@@ -1,3 +1,4 @@
+import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
 import 'package:almuslim/widgets/home-heading-with-content.dart';
@@ -101,7 +102,10 @@ class HomeView extends StatelessWidget {
                     HomeIcon(
                       iconPath: "001-allah.png",
                       text: "99 names",
-                      onTapRun: () => {},
+                      onTapRun: () => {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => NamesOfAllah()))
+                      },
                     ),
                     HomeIcon(
                       iconPath: "halal-sign.png",

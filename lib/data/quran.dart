@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:almuslim/models/ayah-with-translation.dart';
 import 'package:almuslim/models/ayah.dart';
+import 'package:almuslim/models/names-of-Allah.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -29,6 +30,13 @@ class DBProvider {
     final db = await database;
     var res = await db.rawQuery('SELECT * FROM quran_text WHERE sura=?', [surahID]);
     List<Ayah> list = res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
+    return list;
+  }
+
+  Future<List<NamesOfAllah>> get99NamesOfAllah() async{
+    final db = await database;
+    var res = await db.rawQuery('SELECT * FROM namesOfAllah');
+    List<NamesOfAllah> list = res.isNotEmpty ? res.map((e) => NamesOfAllah.fromMap(e)).toList() : [];
     return list;
   }
 
