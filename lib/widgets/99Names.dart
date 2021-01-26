@@ -60,9 +60,9 @@ class NamesOfAllahList extends StatelessWidget {
                     trailing: Text(name.name,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic),),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                      ),),
                   ),
                 );
               });
