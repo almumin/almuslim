@@ -15,7 +15,6 @@ class SurahIndividualWithAyahs extends StatelessWidget {
   Widget build(BuildContext context) {
     var dbProvider = Provider.of<DBProvider>(context);
     return FutureBuilder<List<AyahWithTranslationAndTransliteration>>(
-      //future: dbProvider.getAyahsForSurah(this.surahInfo.id),
       future: dbProvider
           .getAyahsWithTranslationAndTransliterationForSurah(this.surahInfo.id),
       builder: (_,

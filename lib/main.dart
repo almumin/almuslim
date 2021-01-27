@@ -4,6 +4,8 @@ import 'package:almuslim/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:provider/provider.dart';
+import 'package:almuslim/data/quran.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +16,11 @@ Future<void> main() async {
   box.put('dailyAyah', '283');
 
   runApp(new MaterialApp(
-    home: HomeView(
-      box: box,
+    home: Provider<DBProvider>(
+      create: (_) => DBProvider(),
+      child: HomeView(
+        box: box,
+      ),
     ),
   ));
 }

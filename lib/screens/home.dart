@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
+import 'package:almuslim/data/quran.dart';
 
 class HomeView extends StatelessWidget {
   final Box box;
@@ -21,6 +23,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var ayah = box.get('dailyAyah');
+    var dbProvider = Provider.of<DBProvider>(context);
 
     return Scaffold(
         appBar: AppBar(
@@ -33,7 +36,7 @@ class HomeView extends StatelessWidget {
                     "${today.day} ${today.month} ${today.year}",
                     textAlign: TextAlign.center,
                     style:
-                    TextStyle(color: Colors.amber.shade900, fontSize: 12),
+                        TextStyle(color: Colors.amber.shade900, fontSize: 12),
                   ),
                   Text(
                     "${_hijriToday.hDay} ${_hijriToday.longMonthName} ${_hijriToday.hYear}",

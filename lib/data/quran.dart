@@ -19,36 +19,56 @@ class DBProvider {
     return _database;
   }
 
-  Future<List<Surah>> getAllSurahs() async{
+  Future<List<Surah>> getAllSurahs() async {
     final db = await database;
     var res = await db.query('surahs');
-    List<Surah> list = res.isNotEmpty ? res.map((e) => Surah.fromMap(e)).toList() : [];
+    List<Surah> list =
+        res.isNotEmpty ? res.map((e) => Surah.fromMap(e)).toList() : [];
     return list;
   }
 
-  Future<List<Ayah>> getAyahsForSurah(int surahID) async{
+  Future<List<Ayah>> getAyahsForSurah(int surahID) async {
     final db = await database;
-    var res = await db.rawQuery('SELECT * FROM quran_text WHERE sura=?', [surahID]);
-    List<Ayah> list = res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
+    var res =
+        await db.rawQuery('SELECT * FROM quran_text WHERE sura=?', [surahID]);
+    List<Ayah> list =
+        res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
     return list;
   }
 
-  Future<List<NamesOfAllah>> get99NamesOfAllah() async{
+  Future<List<Ayah>> getAyahByIndex(int index) async {
+    final db = await database;
+    var res =
+        await db.rawQuery('SELECT * FROM quran_text WHERE index=?', [index]);
+    List<Ayah> list =
+        res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
+    return list;
+  }
+
+  Future<List<NamesOfAllah>> get99NamesOfAllah() async {
     final db = await database;
     var res = await db.rawQuery('SELECT * FROM namesOfAllah');
-    List<NamesOfAllah> list = res.isNotEmpty ? res.map((e) => NamesOfAllah.fromMap(e)).toList() : [];
+    List<NamesOfAllah> list =
+        res.isNotEmpty ? res.map((e) => NamesOfAllah.fromMap(e)).toList() : [];
     return list;
   }
 
-  Future<List<AyahWithTranslationAndTransliteration>> getAyahsWithTranslationAndTransliterationForSurah(int surahID) async{
+  Future<List<AyahWithTranslationAndTransliteration>>
+      getAyahsWithTranslationAndTransliterationForSurah(int surahID) async {
     final db = await database;
-    var res = await db.rawQuery('SELECT quran_arabic.[index], quran_arabic.sura, quran_arabic.aya, quran_arabic.text, '
+    var res = await db.rawQuery(
+        'SELECT quran_arabic.[index], quran_arabic.sura, quran_arabic.aya, quran_arabic.text, '
         'en_transliteration.text as transliteration, en_sahih.text as translation '
         'FROM quran_text AS quran_arabic'
         ' INNER JOIN en_transliteration ON en_transliteration.[index]=quran_arabic.[index] '
         ' INNER JOIN en_sahih ON en_sahih.[index]=quran_arabic.[index] '
-        ' WHERE quran_arabic.sura=?' , [surahID]);
-    List<AyahWithTranslationAndTransliteration> list = res.isNotEmpty ? res.map((e) => AyahWithTranslationAndTransliteration.fromMap(e)).toList() : [];
+        ' WHERE quran_arabic.sura=?',
+        [surahID]);
+    List<AyahWithTranslationAndTransliteration> list = res.isNotEmpty
+        ? res
+            .map((e) => AyahWithTranslationAndTransliteration.fromMap(e))
+            .toList()
+        : [];
     return list;
   }
 
