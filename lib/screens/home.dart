@@ -1,6 +1,7 @@
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
+import 'package:almuslim/screens/settings-home.dart';
 import 'package:almuslim/widgets/home-heading-with-content.dart';
 import 'package:almuslim/widgets/home-icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +38,13 @@ class HomeView extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.white,
+          leading: InkWell(
+              child: Icon(
+                Icons.settings,
+                color: Colors.black,
+              ),
+            onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome())) },
+          ),
         ),
         backgroundColor: Colors.grey.shade100,
         body: ListView(children: [
@@ -53,7 +61,9 @@ class HomeView extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               top: 60,
               child: Text(
-                today.hour.toString().padLeft(2, "0") + ":"+ today.minute.toString().padLeft(2, "0"),
+                today.hour.toString().padLeft(2, "0") +
+                    ":" +
+                    today.minute.toString().padLeft(2, "0"),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.black87,
@@ -95,16 +105,20 @@ class HomeView extends StatelessWidget {
                       iconPath: "005-Quran.png",
                       text: "Quran",
                       onTapRun: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => QuranHome()))
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => QuranHome()))
                       },
                     ),
                     HomeIcon(
                       iconPath: "001-allah.png",
                       text: "99 names",
                       onTapRun: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => NamesOfAllah()))
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NamesOfAllah()))
                       },
                     ),
                     HomeIcon(
