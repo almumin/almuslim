@@ -122,9 +122,14 @@ class HomeView extends StatelessWidget {
                       },
                     ),
                     HomeIcon(
-                      iconPath: "halal-sign.png",
-                      text: "Halal",
-                      onTapRun: () => {},
+                      iconPath: "settings.png",
+                      text: "Settings",
+                      onTapRun: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SettingsHome()))
+                      },
                     ),
                   ],
                 ),
@@ -136,8 +141,8 @@ class HomeView extends StatelessWidget {
                       onTapRun: () => {},
                     ),
                     HomeIcon(
-                      iconPath: "qibla-compass.png",
-                      text: "Qibla",
+                      iconPath: "halal-sign.png",
+                      text: "Halal",
                       onTapRun: () => {},
                     ),
                     HomeIcon(
