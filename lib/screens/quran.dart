@@ -4,6 +4,7 @@ import 'package:almuslim/widgets/surahs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
 
 class QuranHome extends StatefulWidget {
   @override

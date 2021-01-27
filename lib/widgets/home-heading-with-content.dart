@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 class HomeHeadingWidget extends StatelessWidget {
   final String headingTitle;
+  final Widget widgets;
+
   const HomeHeadingWidget({
     Key key,
     this.headingTitle,
+    this.widgets,
   }) : super(key: key);
 
   @override
@@ -39,9 +42,7 @@ class HomeHeadingWidget extends StatelessWidget {
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: Text(
-                "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups",
-              ),
+              child: widgets,
             )
           ],
         ),

@@ -8,13 +8,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 
 class HomeView extends StatelessWidget {
+  final Box box;
+
+  HomeView({Key key, @required this.box}) : super(key: key);
+
   HijriCalendar _hijriToday = new HijriCalendar.now();
   DateTime today = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    var ayah = box.get('dailyAyah');
+
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -26,7 +33,7 @@ class HomeView extends StatelessWidget {
                     "${today.day} ${today.month} ${today.year}",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(color: Colors.amber.shade900, fontSize: 12),
+                    TextStyle(color: Colors.amber.shade900, fontSize: 12),
                   ),
                   Text(
                     "${_hijriToday.hDay} ${_hijriToday.longMonthName} ${_hijriToday.hYear}",
@@ -38,13 +45,13 @@ class HomeView extends StatelessWidget {
             ),
           ),
           backgroundColor: Colors.white,
-          leading: InkWell(
+          /*leading: InkWell(
               child: Icon(
                 Icons.settings,
                 color: Colors.black,
               ),
             onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome())) },
-          ),
+          ),*/
         ),
         backgroundColor: Colors.grey.shade100,
         body: ListView(children: [
@@ -165,15 +172,21 @@ class HomeView extends StatelessWidget {
           ),
           HomeHeadingWidget(
             headingTitle: "Daily Ayah",
+            widgets: Column(
+              children: [Text('Todays Ayah: $ayah')],
+            ),
           ),
           HomeHeadingWidget(
             headingTitle: "Daily Hadith",
+            widgets: Text("Some desc"),
           ),
           HomeHeadingWidget(
             headingTitle: "Daily Dua",
+            widgets: Text("Some desc"),
           ),
           HomeHeadingWidget(
             headingTitle: "Daily Reminder",
+            widgets: Text("Some desc"),
           ),
         ]));
   }
