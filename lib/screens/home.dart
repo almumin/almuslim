@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:almuslim/data/quran.dart';
+import 'package:almuslim/widgets/daily-ayah.dart';
 
 class HomeView extends StatelessWidget {
   final Box box;
@@ -174,11 +175,10 @@ class HomeView extends StatelessWidget {
             height: 16,
           ),
           HomeHeadingWidget(
-            headingTitle: "Daily Ayah",
-            widgets: Column(
-              children: [Text('Todays Ayah: $ayah')],
-            ),
-          ),
+              headingTitle: "Daily Ayah",
+              widgets: DailyAyahByIndex(
+                index: ayah,
+              )),
           HomeHeadingWidget(
             headingTitle: "Daily Hadith",
             widgets: Text("Some desc"),

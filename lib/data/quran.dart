@@ -39,7 +39,7 @@ class DBProvider {
   Future<List<Ayah>> getAyahByIndex(int index) async {
     final db = await database;
     var res =
-        await db.rawQuery('SELECT * FROM quran_text WHERE index=?', [index]);
+        await db.rawQuery('SELECT * FROM quran_text WHERE [index]=?', [index]);
     List<Ayah> list =
         res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
     return list;

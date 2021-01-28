@@ -10,16 +10,16 @@ class Ayah {
   Ayah({@required this.index,@required this.surah,@required this.ayah,@required this.text});
 
   Map<String, dynamic> toMap() => {
-    'index': index,
-    'surah': surah,
-    'aya': ayah,
-    'text': text,
-  };
+        'index': index,
+        'sura': surah,
+        'aya': ayah,
+        'text': text,
+      };
 
   factory Ayah.fromMap(Map<String, dynamic> map) => Ayah(
-    index: map["index"],
-    surah: map["surah"],
-    ayah: map["aya"],
-    text: map["text"],
-  );
+        index: map["index"],
+        surah: map["sura"],
+        ayah: map["aya"],
+        text: map["text"],
+      );
 }
