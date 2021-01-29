@@ -176,6 +176,7 @@ class HomeView extends StatelessWidget {
           ),
           HomeHeadingWidget(
               headingTitle: "Daily Ayah",
+              icon: Icons.menu_book,
               widgets: DailyAyahByIndex(
                 index: ayah,
               )),
