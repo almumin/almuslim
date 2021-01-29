@@ -23,36 +23,38 @@ class HomeHeadingWidget extends StatelessWidget {
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    icon,
-                    size: 19,
-                    color: Colors.green,
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    headingTitle,
-                    style: TextStyle(color: Colors.green, fontSize: 19),
-                  ),
-                ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              color: Colors.white30,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      icon,
+                      size: 19,
+                      color: Colors.green,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      headingTitle,
+                      style: TextStyle(color: Colors.green, fontSize: 19),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: widgets,
-              )
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              child: widgets,
+            )
+          ],
         ),
       ),
     );

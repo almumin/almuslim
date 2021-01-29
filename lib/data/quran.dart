@@ -44,9 +44,9 @@ class DBProvider {
 
     var res = await db.rawQuery(
         'SELECT quran_arabic.sura, quran_arabic.aya, quran_arabic.text, '
-        'en_transliteration.text as transliteration, surahs.latin as surah_name '
+        'en_sahih.text as translation, surahs.latin as surah_name '
         'FROM quran_text AS quran_arabic'
-        ' INNER JOIN en_transliteration ON en_transliteration.[index]=quran_arabic.[index] '
+        ' INNER JOIN en_sahih ON en_sahih.[index]=quran_arabic.[index] '
         ' INNER JOIN surahs ON surahs.id=quran_arabic.sura '
         ' WHERE quran_arabic.[index]=?',
         [index]);

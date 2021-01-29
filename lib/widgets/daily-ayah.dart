@@ -43,19 +43,33 @@ class DailyAyahByIndex extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.centerRight,
-              child: Text(
-                "${ayahs[0].text}",
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.right,
-                softWrap: true,
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${ayahs[0].text}",
+                  textDirection: TextDirection.rtl,
+                  textAlign: TextAlign.right,
+                  softWrap: true,
+                  style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "${ayahs[0].translation}",
+                  softWrap: true,
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+                ),
               ),
             ),
             SizedBox(
               height: 10,
             ),
             Container(
-              color: Colors.grey.shade300,
+              color: Colors.white30,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
