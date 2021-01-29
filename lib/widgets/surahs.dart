@@ -46,11 +46,23 @@ class SurahList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(surah.english),
-                      Text(surah.arabic),
+                      Text(
+                        surah.latin,
+                        style: TextStyle(fontSize: 15, color: Colors.green),
+                      ),
+                      Text(
+                        "${surah.english} (${surah.numberOfAyah.toString()})",
+                        style: TextStyle(fontSize: 11, color: Colors.black45),
+                      ),
                     ],
                   ),
-                  trailing: Text(surah.numberOfAyah.toString()),
+                  trailing: Text(
+                    surah.arabic,
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.green.shade600,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               );
             });

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:async';
 import 'package:almuslim/models/ayah-with-translation.dart';
 import 'package:almuslim/models/ayah.dart';
+import 'package:almuslim/models/daily-ayah.dart';
 import 'package:almuslim/models/names-of-Allah.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/services.dart';
@@ -36,12 +37,25 @@ class DBProvider {
     return list;
   }
 
-  Future<List<Ayah>> getAyahByIndex(int index) async {
+  Future<List<DailyAyahWithTranslationAndTransliteration>> getAyahByIndex(
+      int index) async {
     final db = await database;
-    var res =
-        await db.rawQuery('SELECT * FROM quran_text WHERE [index]=?', [index]);
-    List<Ayah> list =
-        res.isNotEmpty ? res.map((e) => Ayah.fromMap(e)).toList() : [];
+    //var res = await db.rawQuery('SELECT * FROM quran_text WHERE [index]=?', [index]);
+
+    var res = await db.rawQuery(
+        'SELECT quran_arabic.sura, quran_arabic.aya, quran_arabic.text, '
+        'en_transliteration.text as transliteration, surahs.latin as surah_name '
+        'FROM quran_text AS quran_arabic'
+        ' INNER JOIN en_transliteration ON en_transliteration.[index]=quran_arabic.[index] '
+        ' INNER JOIN surahs ON surahs.id=quran_arabic.sura '
+        ' WHERE quran_arabic.[index]=?',
+        [index]);
+
+    List<DailyAyahWithTranslationAndTransliteration> list = res.isNotEmpty
+        ? res
+            .map((e) => DailyAyahWithTranslationAndTransliteration.fromMap(e))
+            .toList()
+        : [];
     return list;
   }
 

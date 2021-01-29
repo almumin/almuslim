@@ -1,7 +1,7 @@
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/models/ayah-with-translation.dart';
 import 'package:almuslim/models/ayah.dart';
-import 'package:almuslim/models/surahs.dart';
+import 'package:almuslim/models/daily-ayah.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +14,11 @@ class DailyAyahByIndex extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var dbProvider = Provider.of<DBProvider>(context);
-    return FutureBuilder<List<Ayah>>(
+    return FutureBuilder<List<DailyAyahWithTranslationAndTransliteration>>(
       future: dbProvider.getAyahByIndex(int.parse(this.index)),
-      builder: (_, AsyncSnapshot<List<Ayah>> snapshot) {
+      builder: (_,
+          AsyncSnapshot<List<DailyAyahWithTranslationAndTransliteration>>
+              snapshot) {
         print(snapshot.error.toString());
         if (!snapshot.hasData) {
           return Center(
@@ -58,7 +60,8 @@ class DailyAyahByIndex extends StatelessWidget {
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
                   children: [
-                    Text("Today's Ayah: ${ayahs[0].surah}:${ayahs[0].ayah}"),
+                    Text(
+                        "Today's Ayah is from ${ayahs[0].surahName}: ${ayahs[0].surah}:${ayahs[0].ayah}"),
                     InkWell(
                       child: Icon(Icons.read_more),
                     )
