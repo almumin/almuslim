@@ -13,12 +13,15 @@ import 'package:provider/provider.dart';
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/widgets/daily-ayah.dart';
 import 'package:location/location.dart';
+import 'package:geocoding/geocoding.dart';
 
 class HomeView extends StatelessWidget {
   final Box box;
   final LocationData locationData;
+  final List<Placemark> placemarks;
 
-  HomeView({Key key, @required this.box, this.locationData}) : super(key: key);
+  HomeView({Key key, @required this.box, this.locationData, this.placemarks})
+      : super(key: key);
 
   HijriCalendar _hijriToday = new HijriCalendar.now();
   DateTime today = DateTime.now();
@@ -91,7 +94,8 @@ class HomeView extends StatelessWidget {
                     Icons.location_pin,
                     size: 16,
                   ),
-                  Text("Tampere"),
+                  Text(
+                      "${placemarks.last.name}, ${placemarks.last.administrativeArea}"),
                 ],
               ),
               top: 10,
@@ -114,7 +118,8 @@ class HomeView extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Prayer(
-                                      locationData: locationData,
+                                  locationData: locationData,
+                                      placemarks: placemarks,
                                     )))
                       },
                     ),

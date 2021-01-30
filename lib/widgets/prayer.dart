@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 
 class PrayerColumn extends StatelessWidget {
   final String waqt;
@@ -61,9 +62,12 @@ class PrayerColumn extends StatelessWidget {
 
 class PrayerHeading extends StatelessWidget {
   final String headingTitle;
+  final List<geo.Placemark> placemarks;
+
   const PrayerHeading({
     Key key,
     this.headingTitle,
+    this.placemarks,
   }) : super(key: key);
 
   @override
@@ -105,7 +109,7 @@ class PrayerHeading extends StatelessWidget {
                     size: 20,
                   ),
                   Text(
-                    "Tampere, Finland",
+                    "${placemarks.last.name}, ${placemarks.last.administrativeArea}",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

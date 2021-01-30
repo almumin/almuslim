@@ -8,7 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:almuslim/data/quran.dart';
 import 'dart:math';
 import 'package:almuslim/models/constants.dart';
-import 'package:location/location.dart';
+import 'package:location/location.dart' as loc;
+import 'package:geolocator/geolocator.dart';
+
+import 'package:geocoding/geocoding.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,10 +24,10 @@ Future<void> main() async {
   var box = await Hive.openBox("almuslim");
   box.put('dailyAyah', randomNumber.toString());
 
-  // Location
-  Location location = new Location();
+  // Location Starts
+  loc.Location location = new loc.Location();
   bool _serviceEnabled;
-  PermissionStatus _permissionGranted;
+  loc.PermissionStatus _permissionGranted;
 
   _serviceEnabled = await location.serviceEnabled();
   if (!_serviceEnabled) {
@@ -35,15 +38,22 @@ Future<void> main() async {
   }
 
   _permissionGranted = await location.hasPermission();
-  if (_permissionGranted == PermissionStatus.denied) {
+  if (_permissionGranted == loc.PermissionStatus.denied) {
     _permissionGranted = await location.requestPermission();
-    if (_permissionGranted != PermissionStatus.granted) {
+    if (_permissionGranted != loc.PermissionStatus.granted) {
       return null;
     }
   }
 
-  LocationData _locationData;
+  loc.LocationData _locationData;
   _locationData = await location.getLocation();
+  // Location Ends
+
+  // GEOLocation Starts ## package geolocator is in pubspec but not used anywhere
+  List<Placemark> placemarks = await placemarkFromCoordinates(
+      _locationData.latitude, _locationData.longitude);
+  print(placemarks.last.name);
+  // GEOLocation Ends
 
   runApp(new MaterialApp(
     home: Provider<DBProvider>(
@@ -51,6 +61,7 @@ Future<void> main() async {
       child: HomeView(
         box: box,
         locationData: _locationData,
+        placemarks: placemarks,
       ),
     ),
   ));

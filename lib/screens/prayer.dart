@@ -3,11 +3,13 @@ import 'package:almuslim/widgets/prayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:geocoding/geocoding.dart' as geo;
 
 class Prayer extends StatelessWidget {
   final LocationData locationData;
+  final List<geo.Placemark> placemarks;
 
-  Prayer({Key key, this.locationData}) : super(key: key);
+  Prayer({Key key, this.locationData, this.placemarks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +25,35 @@ class Prayer extends StatelessWidget {
           Container(
             child: Column(
               children: [
-                PrayerHeading(headingTitle: "Prayer times",),
-                PrayerColumn(waqt: "Fajr", waqtPrayerTime: pTimes.fajr, icon: Icons.wb_sunny_outlined,),
-                PrayerColumn(waqt: "Duhr", waqtPrayerTime: pTimes.dhuhr, icon: Icons.wb_sunny,),
-                PrayerColumn(waqt: "Asr", waqtPrayerTime: pTimes.asr, icon: Icons.wb_sunny,),
-                PrayerColumn(waqt: "Maghrib", waqtPrayerTime: pTimes.maghrib, icon: Icons.cloud_queue,),
-                PrayerColumn(waqt: "Isha", waqtPrayerTime: pTimes.isha, icon: Icons.wb_cloudy_rounded,),
+                PrayerHeading(
+                  headingTitle: "Prayer times",
+                  placemarks: placemarks,
+                ),
+                PrayerColumn(
+                  waqt: "Fajr",
+                  waqtPrayerTime: pTimes.fajr,
+                  icon: Icons.wb_sunny_outlined,
+                ),
+                PrayerColumn(
+                  waqt: "Duhr",
+                  waqtPrayerTime: pTimes.dhuhr,
+                  icon: Icons.wb_sunny,
+                ),
+                PrayerColumn(
+                  waqt: "Asr",
+                  waqtPrayerTime: pTimes.asr,
+                  icon: Icons.wb_sunny,
+                ),
+                PrayerColumn(
+                  waqt: "Maghrib",
+                  waqtPrayerTime: pTimes.maghrib,
+                  icon: Icons.cloud_queue,
+                ),
+                PrayerColumn(
+                  waqt: "Isha",
+                  waqtPrayerTime: pTimes.isha,
+                  icon: Icons.wb_cloudy_rounded,
+                ),
               ],
             ),
           )

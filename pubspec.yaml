@@ -32,9 +32,11 @@ dependencies:
   path_provider: ^1.6.27
   provider: ^4.3.2+3
   location: ^3.2.4
-
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
+
+  geolocator: ^6.1.14
+  geocoding: ^1.0.5
 
 dev_dependencies:
   flutter_test:
