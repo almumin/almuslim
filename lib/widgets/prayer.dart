@@ -106,13 +106,13 @@ class PrayerHeading extends StatelessWidget {
                   Icon(
                     Icons.location_pin,
                     color: Colors.white,
-                    size: 20,
+                    size: 16,
                   ),
                   Text(
                     "${placemarks.last.name}, ${placemarks.last.administrativeArea}",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 16,
                     ),
                   ),
                 ],
