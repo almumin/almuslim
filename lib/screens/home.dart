@@ -12,11 +12,13 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/widgets/daily-ayah.dart';
+import 'package:location/location.dart';
 
 class HomeView extends StatelessWidget {
   final Box box;
+  final LocationData locationData;
 
-  HomeView({Key key, @required this.box}) : super(key: key);
+  HomeView({Key key, @required this.box, this.locationData}) : super(key: key);
 
   HijriCalendar _hijriToday = new HijriCalendar.now();
   DateTime today = DateTime.now();
@@ -108,8 +110,12 @@ class HomeView extends StatelessWidget {
                       iconPath: "013-prayer-mat.png",
                       text: "Prayer",
                       onTapRun: () => {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Prayer()))
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Prayer(
+                                      locationData: locationData,
+                                    )))
                       },
                     ),
                     HomeIcon(

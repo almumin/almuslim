@@ -5,21 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class Prayer extends StatelessWidget {
-  PrayerTimes pTimes = getPrayerTimes(Coordinates(61.44480082215663, 23.853269454564234));
+  final LocationData locationData;
 
-  // Location Starts
-
-
-  // Location Ends
+  Prayer({Key key, this.locationData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    PrayerTimes pTimes = getPrayerTimes(
+        Coordinates(locationData.latitude, locationData.longitude));
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "Prayer times"
-        ),
+        title: Text("Prayer times"),
         backgroundColor: Colors.blueGrey.shade900,
       ),
       body: ListView(

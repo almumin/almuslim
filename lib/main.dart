@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:almuslim/data/quran.dart';
 import 'dart:math';
 import 'package:almuslim/models/constants.dart';
+import 'package:location/location.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +21,36 @@ Future<void> main() async {
   var box = await Hive.openBox("almuslim");
   box.put('dailyAyah', randomNumber.toString());
 
+  // Location
+  Location location = new Location();
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+
+  _serviceEnabled = await location.serviceEnabled();
+  if (!_serviceEnabled) {
+    _serviceEnabled = await location.requestService();
+    if (!_serviceEnabled) {
+      return null;
+    }
+  }
+
+  _permissionGranted = await location.hasPermission();
+  if (_permissionGranted == PermissionStatus.denied) {
+    _permissionGranted = await location.requestPermission();
+    if (_permissionGranted != PermissionStatus.granted) {
+      return null;
+    }
+  }
+
+  LocationData _locationData;
+  _locationData = await location.getLocation();
+
   runApp(new MaterialApp(
     home: Provider<DBProvider>(
       create: (_) => DBProvider(),
       child: HomeView(
         box: box,
+        locationData: _locationData,
       ),
     ),
   ));
