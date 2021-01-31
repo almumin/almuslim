@@ -109,7 +109,7 @@ class PrayerHeading extends StatelessWidget {
                     size: 16,
                   ),
                   Text(
-                    "${placemarks.last.name}, ${placemarks.last.administrativeArea}",
+                    "${placemarks.last.name}, ${placemarks.last.locality}",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
