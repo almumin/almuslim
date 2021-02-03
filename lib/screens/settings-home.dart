@@ -23,7 +23,7 @@ class _SettingsHomeState extends State<SettingsHome> {
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  bottom: 4, top: 20, left: 20, right: 20),
+                  bottom: 4, top: 20, left: 30, right: 30),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(

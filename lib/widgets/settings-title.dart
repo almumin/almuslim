@@ -27,14 +27,14 @@ class SettingsTitle extends StatelessWidget {
               Icon(
                 icon,
                 size: 17,
-                color: Colors.black87,
+                color: Colors.black54,
               ),
               SizedBox(
                 width: 8,
               ),
               Text(
                 headingText,
-                style: TextStyle(color: Colors.black87, fontSize: 17),
+                style: TextStyle(color: Colors.black54, fontSize: 17),
               ),
             ],
           ),
