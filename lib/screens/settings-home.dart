@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:almuslim/widgets/settings-title.dart';
 
@@ -10,47 +11,63 @@ class _SettingsHomeState extends State<SettingsHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-          children: [
-        Container(
-          decoration: BoxDecoration(
-              color: Color(0xFF87D7F5),
-              image: DecorationImage(
-                image: AssetImage("assets/icons/istanbul.png"),
-                alignment: Alignment.centerRight,
-              )),
+        bottomNavigationBar: InkWell(
           child: Padding(
-            padding: const EdgeInsets.all(36.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Icon(
-                  Icons.settings,
-                  size: 30,
-                  color: Colors.black54,
-                ),
-                Text(
-                  " Settings ",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black54,
-                  ),
-                ),
+                Icon(Icons.arrow_back_ios_rounded),
+                Text("Go back"),
               ],
             ),
           ),
+          onTap: () => {Navigator.of(context).pop()},
         ),
-        Padding(
-          padding:
+        body: ListView(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Color(0XFF04B965),
+                image: DecorationImage(
+                  image: AssetImage("assets/icons/masjid-short.png"),
+                  alignment: Alignment.centerRight,
+                ),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(25),
+                    bottomRight: Radius.circular(25)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(36.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.settings,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      " Settings ",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding:
               const EdgeInsets.only(bottom: 4, top: 20, left: 30, right: 30),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.black12)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.black12)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       //color: Colors.white30,
