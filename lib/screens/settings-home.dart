@@ -10,28 +10,47 @@ class _SettingsHomeState extends State<SettingsHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Icon(Icons.settings),
-              Text(" Settings"),
-            ],
-          ),
-          backgroundColor: Colors.blueGrey.shade900,
-        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 4, top: 20, left: 30, right: 30),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.black12)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          decoration: BoxDecoration(
+              color: Color(0xFF87D7F5),
+              image: DecorationImage(
+                image: AssetImage("assets/icons/istanbul.png"),
+                alignment: Alignment.centerRight,
+              )),
+          child: Padding(
+            padding: const EdgeInsets.all(36.0),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.settings,
+                  size: 30,
+                  color: Colors.black54,
+                ),
+                Text(
+                  " Settings ",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding:
+              const EdgeInsets.only(bottom: 4, top: 20, left: 30, right: 30),
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black12)),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       //color: Colors.white30,
