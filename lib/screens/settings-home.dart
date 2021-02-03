@@ -42,26 +42,32 @@ class _SettingsHomeState extends State<SettingsHome> {
                             SettingsTitle(
                               icon: Icons.access_time_outlined,
                               headingText: "Prayer Times",
+                              hasBorder: true,
                             ),
                             SettingsTitle(
                               icon: Icons.book,
                               headingText: "Quran",
+                              hasBorder: true,
                             ),
                             SettingsTitle(
                               icon: Icons.fiber_manual_record_outlined,
                               headingText: "Duas",
+                              hasBorder: true,
                             ),
                             SettingsTitle(
                               icon: Icons.calendar_today,
                               headingText: "Calendar",
+                              hasBorder: true,
                             ),
                             SettingsTitle(
                               icon: Icons.language,
                               headingText: "Languages",
+                              hasBorder: true,
                             ),
                             SettingsTitle(
                               icon: Icons.design_services,
                               headingText: "Themes",
+                              hasBorder: false,
                             ),
                           ],
                         ),

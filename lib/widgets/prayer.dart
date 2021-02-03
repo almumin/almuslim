@@ -72,6 +72,7 @@ class PrayerHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime today = DateTime.now();
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Container(
@@ -90,7 +91,9 @@ class PrayerHeading extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "20:31",
+                    today.hour.toString().padLeft(2, "0") +
+                        ":" +
+                        today.minute.toString().padLeft(2, "0"),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 52,

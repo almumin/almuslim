@@ -23,11 +23,10 @@ class HomeView extends StatelessWidget {
   HomeView({Key key, @required this.box, this.locationData, this.placemarks})
       : super(key: key);
 
-  HijriCalendar _hijriToday = new HijriCalendar.now();
-  DateTime today = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
+    HijriCalendar _hijriToday = new HijriCalendar.now();
+    DateTime today = DateTime.now();
     var ayah = box.get('dailyAyah');
     var dbProvider = Provider.of<DBProvider>(context);
 
@@ -42,7 +41,7 @@ class HomeView extends StatelessWidget {
                     "${today.day} ${today.month} ${today.year}",
                     textAlign: TextAlign.center,
                     style:
-                        TextStyle(color: Colors.amber.shade900, fontSize: 12),
+                    TextStyle(color: Colors.amber.shade900, fontSize: 12),
                   ),
                   Text(
                     "${_hijriToday.hDay} ${_hijriToday.longMonthName} ${_hijriToday.hYear}",
@@ -119,8 +118,8 @@ class HomeView extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => Prayer(
                                   locationData: locationData,
-                                      placemarks: placemarks,
-                                    )))
+                                  placemarks: placemarks,
+                                )))
                       },
                     ),
                     HomeIcon(

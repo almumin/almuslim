@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class SettingsTitle extends StatelessWidget {
   final IconData icon;
   final String headingText;
+  final bool hasBorder;
 
-  const SettingsTitle({Key key, this.icon, this.headingText}) : super(key: key);
+  const SettingsTitle({Key key, this.icon, this.headingText, this.hasBorder})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,6 @@ class SettingsTitle extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(
           bottom: BorderSide(
-            //                   <--- left side
             color: Colors.black38,
             width: 1.0,
           ),
