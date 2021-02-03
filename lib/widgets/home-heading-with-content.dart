@@ -22,6 +22,10 @@ class HomeHeadingWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(8),
+          /*border: Border.all(
+              color: Colors.black12,
+              width: 1.0,
+            )*/
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
