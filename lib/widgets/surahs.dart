@@ -60,7 +60,7 @@ class SurahList extends StatelessWidget {
                     surah.arabic,
                     style: TextStyle(
                         fontSize: 16,
-                        color: Colors.green.shade600,
+                        color: Colors.green.shade500,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
