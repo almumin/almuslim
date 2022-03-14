@@ -1,4 +1,4 @@
-# Al-Muslim
+# Al-Muslim app
 
 A religious app for the practicing muslims. Developed with Flutter. This app is completely open source. The data are collected from open source projects.
 Anyone interested in contributing to this project can contact us directly.
