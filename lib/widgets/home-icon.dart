@@ -14,16 +14,17 @@ class HomeIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return InkWell(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(width * .05),
         child: Container(
           child: Column(
             children: [
               Image.asset(
                 "assets/icons/" + iconPath,
                 height: 70,
-                width: 70,
+                width: width * .58 / 4,
                 fit: BoxFit.fitWidth,
               ),
               Text(text)
