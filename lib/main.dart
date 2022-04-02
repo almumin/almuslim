@@ -13,8 +13,11 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:geocoding/geocoding.dart';
 
+import 'modules/notifications.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   Random random = new Random();

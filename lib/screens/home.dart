@@ -1,6 +1,7 @@
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
+import 'package:almuslim/screens/reminders.dart';
 import 'package:almuslim/screens/settings-home.dart';
 import 'package:almuslim/widgets/home-heading-with-content.dart';
 import 'package:almuslim/widgets/home-icon.dart';
@@ -174,7 +175,12 @@ class HomeView extends StatelessWidget {
                     HomeIcon(
                       iconPath: "023-date-palm.png",
                       text: "Reminder",
-                      onTapRun: () => {},
+                      onTapRun: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Reminders()))
+                      },
                     ),
                   ],
                 )
