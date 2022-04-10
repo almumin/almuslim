@@ -1,3 +1,4 @@
+import 'package:almuslim/modules/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 
@@ -81,7 +82,7 @@ class PrayerHeading extends StatelessWidget {
               image: AssetImage("assets/icons/015-mosque.png"),
               alignment: Alignment.centerRight,
             ),
-            color: Color(0XFF50bb64),
+            color: baseGreenColor,
             borderRadius: BorderRadius.circular(8)),
         width: MediaQuery.of(context).size.width,
         child: Padding(

@@ -1,7 +1,6 @@
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:almuslim/screens/surah-individual.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,9 +35,13 @@ class SurahList extends StatelessWidget {
             itemBuilder: (_, int index) {
               var surah = surahs[index];
               return InkWell(
-                onTap: () =>{
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SurahIndividual(surah: surahs[index],)))
+                onTap: () => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SurahIndividual(
+                                surah: surahs[index],
+                              )))
                 },
                 child: ListTile(
                   leading: Text("${surah.id}."),

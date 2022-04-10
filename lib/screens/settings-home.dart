@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:almuslim/screens/prayer-times-settings.dart';
 import 'package:flutter/material.dart';
 import 'package:almuslim/widgets/settings-title.dart';
 
@@ -58,8 +58,8 @@ class _SettingsHomeState extends State<SettingsHome> {
               ),
             ),
             Padding(
-              padding:
-              const EdgeInsets.only(bottom: 4, top: 20, left: 30, right: 30),
+              padding: const EdgeInsets.only(
+                  bottom: 4, top: 20, left: 30, right: 30),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
@@ -79,6 +79,13 @@ class _SettingsHomeState extends State<SettingsHome> {
                               icon: Icons.access_time_outlined,
                               headingText: "Prayer Times",
                               hasBorder: true,
+                              onTap: () => {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PrayerTimesSettings()))
+                              },
                             ),
                             SettingsTitle(
                               icon: Icons.book,
@@ -104,6 +111,7 @@ class _SettingsHomeState extends State<SettingsHome> {
                               icon: Icons.design_services,
                               headingText: "Themes",
                               hasBorder: false,
+                              onTap: () => {print("print something")},
                             ),
                           ],
                         ),

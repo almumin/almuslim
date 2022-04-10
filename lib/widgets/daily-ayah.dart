@@ -1,8 +1,5 @@
 import 'package:almuslim/data/quran.dart';
-import 'package:almuslim/models/ayah-with-translation.dart';
-import 'package:almuslim/models/ayah.dart';
 import 'package:almuslim/models/daily-ayah.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
 import 'package:adhan/adhan.dart';
+import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/widgets/prayer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart' as geo;
@@ -18,7 +18,7 @@ class Prayer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Prayer times"),
-        backgroundColor: Colors.blueGrey.shade900,
+        backgroundColor: baseGreenColor,
       ),
       body: ListView(
         children: [

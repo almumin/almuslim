@@ -1,7 +1,5 @@
 import 'package:almuslim/modules/notifications.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
 class Reminders extends StatefulWidget {

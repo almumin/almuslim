@@ -1,7 +1,6 @@
 import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:almuslim/widgets/surah-individual-content.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

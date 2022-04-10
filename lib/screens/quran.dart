@@ -1,7 +1,5 @@
 import 'package:almuslim/data/quran.dart';
-import 'package:almuslim/models/surahs.dart';
 import 'package:almuslim/widgets/surahs.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
@@ -47,12 +45,13 @@ class _QuranHomeState extends State<QuranHome>
         ),
         body: new TabBarView(
             controller: controller,
-            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
             children: [
-          //Text("Quran Home"),
-          SurahList(),
-          Text("Quran Secondary"),
-        ]),
+              //Text("Quran Home"),
+              SurahList(),
+              Text("Quran Secondary"),
+            ]),
       ),
     );
   }
