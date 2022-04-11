@@ -2,6 +2,7 @@ import 'package:adhan/adhan.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/widgets/prayer.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 

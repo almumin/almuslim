@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:almuslim/modules/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart' as geo;
@@ -62,10 +64,13 @@ class PrayerColumn extends StatelessWidget {
 }
 
 class PrayerHeading extends StatelessWidget {
+
   final String headingTitle;
   final List<geo.Placemark> placemarks;
+  String _now;
+  Timer _everySecond;
 
-  const PrayerHeading({
+  PrayerHeading({
     Key key,
     this.headingTitle,
     this.placemarks,
