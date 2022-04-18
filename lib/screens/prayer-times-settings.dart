@@ -1,6 +1,9 @@
+import 'package:adhan/adhan.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
+import '../data/calculation-methods.dart';
 
 class PrayerTimesSettings extends StatefulWidget {
   final Box box;
@@ -11,27 +14,30 @@ class PrayerTimesSettings extends StatefulWidget {
 }
 
 class _PrayerTimesSettingsState extends State<PrayerTimesSettings> {
-
-  List<CalculationModel> calculationMethods = new List<CalculationModel>();
+  List<CalculationModel> calculationMethods = [];
 
   @override
   void initState() {
     super.initState();
-    calculationMethods.add(new CalculationModel(true, 'muslim_world_league', 'Muslim world league'));
-    calculationMethods.add(new CalculationModel(false, 'egyptian', 'Egyptian'));
-    calculationMethods.add(new CalculationModel(false, 'karachi', 'Karachi'));
-    calculationMethods.add(new CalculationModel(false, 'umm_al_qura', 'Umm Al Qura'));
-    calculationMethods.add(new CalculationModel(false, 'dubai', 'Dubai'));
-    calculationMethods.add(new CalculationModel(false, 'qatar', 'Qatar'));
-    calculationMethods.add(new CalculationModel(false, 'kuwait', 'Kuwait'));
-    calculationMethods.add(new CalculationModel(false, 'singapore', 'Singapore'));
-    calculationMethods.add(new CalculationModel(false, 'north_america', 'North america'));
+    String currentCalculationMethod = widget.box.get("calculationMethod");
+    List<CalculationMethods> allCalculationMethods =
+        CalculationMethods.getMethods();
+    for (int i = 0; i < allCalculationMethods.length; i++) {
+      bool selected = false;
+      if (currentCalculationMethod != null &&
+          currentCalculationMethod == allCalculationMethods[i].id) {
+        selected = true;
+      }
+      calculationMethods.add(new CalculationModel(
+          selected,
+          allCalculationMethods[i].id,
+          allCalculationMethods[i].name,
+          allCalculationMethods[i].description));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var method = widget.box.get('calculationMethod');
-    print(method);
     return Scaffold(
       appBar: AppBar(
         title: Text("Prayer times settings"),
@@ -41,11 +47,12 @@ class _PrayerTimesSettingsState extends State<PrayerTimesSettings> {
         itemCount: calculationMethods.length,
         itemBuilder: (BuildContext context, int index) {
           return new InkWell(
-            //highlightColor: Colors.red,
-            splashColor: Colors.blueAccent,
+            highlightColor: baseGreenColor,
+            splashColor: baseGreenColor,
             onTap: () {
               setState(() {
-                calculationMethods.forEach((element) => element.isSelected = false);
+                calculationMethods
+                    .forEach((element) => element.isSelected = false);
                 calculationMethods[index].isSelected = true;
               });
               widget.box.put("calculationMethod", calculationMethods[index].id);
@@ -62,8 +69,9 @@ class CalculationModel {
   bool isSelected;
   final String id;
   final String name;
+  final String description;
 
-  CalculationModel(this.isSelected, this.id, this.name);
+  CalculationModel(this.isSelected, this.id, this.name, this.description);
 }
 
 class CalculationRadioItem extends StatelessWidget {
@@ -92,13 +100,30 @@ class CalculationRadioItem extends StatelessWidget {
                 border: new Border.all(
                     width: 1.0,
                     color: _item.isSelected ? baseGreenColor : Colors.grey),
-                borderRadius: const BorderRadius.all(const Radius.circular(2.0)),
+                borderRadius:
+                    const BorderRadius.all(const Radius.circular(2.0)),
               ),
             ),
           ),
           new Container(
             margin: new EdgeInsets.only(left: 10.0),
-            child: new Text(_item.name),
+            child: Container(
+              width: MediaQuery.of(context).size.width - 60,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(_item.name),
+                  SizedBox(height: 5),
+                  Text(
+                    _item.description,
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           )
         ],
       ),

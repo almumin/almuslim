@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
@@ -14,7 +16,7 @@ import 'package:almuslim/widgets/daily-ayah.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   final Box box;
   final LocationData locationData;
   final List<Placemark> placemarks;
@@ -23,12 +25,34 @@ class HomeView extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  DateTime today;
+  Timer _everySecond;
+
+  @override
+  void initState() {
+    super.initState();
+    // sets first datetime value
+    today = DateTime.now();
+    // defines a timer
+    _everySecond = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {
+        today = DateTime.now();
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     HijriCalendar _hijriToday = new HijriCalendar.now();
-    DateTime today = DateTime.now();
-    var ayah = box.get('dailyAyah');
+    if (today == null){
+      today = DateTime.now();
+    }
+    var ayah = widget.box.get('dailyAyah');
     var dbProvider = Provider.of<DBProvider>(context);
-
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -40,7 +64,7 @@ class HomeView extends StatelessWidget {
                     "${today.day} ${today.month} ${today.year}",
                     textAlign: TextAlign.center,
                     style:
-                    TextStyle(color: Colors.amber.shade900, fontSize: 12),
+                        TextStyle(color: Colors.amber.shade900, fontSize: 12),
                   ),
                   Text(
                     "${_hijriToday.hDay} ${_hijriToday.longMonthName} ${_hijriToday.hYear}",
@@ -93,7 +117,7 @@ class HomeView extends StatelessWidget {
                     size: 16,
                   ),
                   Text(
-                      "${placemarks.last.street}, ${placemarks.last.locality}"),
+                      "${widget.placemarks.last.street}, ${widget.placemarks.last.locality}"),
                 ],
               ),
               top: 10,
@@ -116,10 +140,10 @@ class HomeView extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Prayer(
-                                  locationData: locationData,
-                                  placemarks: placemarks,
-                                  box: box,
-                                )))
+                                      locationData: widget.locationData,
+                                      placemarks: widget.placemarks,
+                                      box: widget.box,
+                                    )))
                       },
                     ),
                     HomeIcon(
@@ -149,7 +173,9 @@ class HomeView extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SettingsHome(box: box,)))
+                                builder: (context) => SettingsHome(
+                                      box: widget.box,
+                                    )))
                       },
                     ),
                   ],
