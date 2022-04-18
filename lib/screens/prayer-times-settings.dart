@@ -1,8 +1,10 @@
 import 'package:almuslim/modules/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class PrayerTimesSettings extends StatefulWidget {
-  const PrayerTimesSettings({Key key}) : super(key: key);
+  final Box box;
+  const PrayerTimesSettings({Key key, this.box}) : super(key: key);
 
   @override
   State<PrayerTimesSettings> createState() => _PrayerTimesSettingsState();
@@ -28,6 +30,8 @@ class _PrayerTimesSettingsState extends State<PrayerTimesSettings> {
 
   @override
   Widget build(BuildContext context) {
+    var method = widget.box.get('calculationMethod');
+    print(method);
     return Scaffold(
       appBar: AppBar(
         title: Text("Prayer times settings"),
@@ -44,7 +48,7 @@ class _PrayerTimesSettingsState extends State<PrayerTimesSettings> {
                 calculationMethods.forEach((element) => element.isSelected = false);
                 calculationMethods[index].isSelected = true;
               });
-              print(calculationMethods[index].name);
+              widget.box.put("calculationMethod", calculationMethods[index].id);
             },
             child: new CalculationRadioItem(calculationMethods[index]),
           );

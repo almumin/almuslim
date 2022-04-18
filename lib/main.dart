@@ -10,12 +10,14 @@ import 'dart:math';
 import 'package:almuslim/models/constants.dart';
 import 'package:location/location.dart' as loc;
 import 'package:geolocator/geolocator.dart';
-
 import 'package:geocoding/geocoding.dart';
-
 import 'modules/notifications.dart';
 
+void callbackDispatcher() {
+}
+
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();

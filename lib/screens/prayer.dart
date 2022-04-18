@@ -7,15 +7,29 @@ import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 
 class Prayer extends StatelessWidget {
+  final Box box;
   final LocationData locationData;
   final List<geo.Placemark> placemarks;
 
-  Prayer({Key key, this.locationData, this.placemarks}) : super(key: key);
+  Prayer({Key key, this.locationData, this.placemarks, this.box})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var ayah = box.get('dailyAyah');
+    // TODO: update the static calculation method selection to dynamic
+    var method = box.get('calculationMethod');
+    if (method == null) {
+      box.put('calculationMethod', 'north_america');
+    }
+    print("ayah");
+    print(ayah);
+    print(method);
     PrayerTimes pTimes = getPrayerTimes(
-        Coordinates(locationData.latitude, locationData.longitude));
+      Coordinates(locationData.latitude, locationData.longitude),
+      method,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Prayer times"),
@@ -64,13 +78,21 @@ class Prayer extends StatelessWidget {
   }
 }
 
-PrayerTimes getPrayerTimes(Coordinates myCoordinates){ // Replace with your own location lat, lng.
-  CalculationParameters params = CalculationMethod.karachi.getParameters();
-  params.madhab = Madhab.hanafi;
+PrayerTimes getPrayerTimes(
+    Coordinates myCoordinates, String calculationMethod) {
+  // Replace with your own location lat, lng.
+  // CalculationParameters params = CalculationMethod.karachi.getParameters();
+  CalculationParameters params =
+      CalculationMethod.values.byName(calculationMethod).getParameters();
+
+  print("params.method");
+  print(params.method);
+  print(CalculationMethod.values);
+  params.madhab = Madhab.shafi;
   return PrayerTimes.today(myCoordinates, params);
 }
 
-Future<Location> getLocation() async{
+Future<Location> getLocation() async {
   Location location = new Location();
 
   bool _serviceEnabled;

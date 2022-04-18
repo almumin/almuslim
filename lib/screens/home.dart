@@ -118,6 +118,7 @@ class HomeView extends StatelessWidget {
                                 builder: (context) => Prayer(
                                   locationData: locationData,
                                   placemarks: placemarks,
+                                  box: box,
                                 )))
                       },
                     ),
@@ -148,7 +149,7 @@ class HomeView extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SettingsHome()))
+                                builder: (context) => SettingsHome(box: box,)))
                       },
                     ),
                   ],

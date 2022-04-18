@@ -1,8 +1,13 @@
 import 'package:almuslim/screens/prayer-times-settings.dart';
 import 'package:flutter/material.dart';
 import 'package:almuslim/widgets/settings-title.dart';
+import 'package:hive/hive.dart';
 
 class SettingsHome extends StatefulWidget {
+  final Box box;
+
+  const SettingsHome({Key key, this.box}) : super(key: key);
+
   @override
   _SettingsHomeState createState() => _SettingsHomeState();
 }
@@ -10,6 +15,7 @@ class SettingsHome extends StatefulWidget {
 class _SettingsHomeState extends State<SettingsHome> {
   @override
   Widget build(BuildContext context) {
+    // var ayah = this.box.get('dailyAyah'); TODO: find a way to solve the getter issue
     return Scaffold(
         bottomNavigationBar: InkWell(
           child: Padding(
@@ -84,7 +90,7 @@ class _SettingsHomeState extends State<SettingsHome> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            PrayerTimesSettings()))
+                                            PrayerTimesSettings(box: widget.box,)))
                               },
                             ),
                             SettingsTitle(
