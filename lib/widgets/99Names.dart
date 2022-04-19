@@ -10,6 +10,7 @@ class NamesOfAllahList extends StatelessWidget {
     return FutureBuilder<List<NamesOfAllah>>(
         future: dbProvider.get99NamesOfAllah(),
         builder: (_, AsyncSnapshot<List<NamesOfAllah>> snapshot) {
+          print("99names snapshot.error.toString()");
           print(snapshot.error.toString());
           if (!snapshot.hasData) {
             return Center(
@@ -45,14 +46,14 @@ class NamesOfAllahList extends StatelessWidget {
                         Text(
                           name.transliteration,
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 11,
                           ),
                         ),
                         Text(
                           name.meaning,
                           style: TextStyle(
                               color: Colors.green,
-                              fontSize: 14,
+                              fontSize: 12,
                               fontStyle: FontStyle.italic),
                         ),
                       ],
@@ -60,8 +61,8 @@ class NamesOfAllahList extends StatelessWidget {
                     trailing: Text(name.name,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal
                       ),),
                   ),
                 );
