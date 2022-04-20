@@ -1,4 +1,7 @@
+import 'dart:collection';
+
 import 'package:almuslim/screens/prayer-times-settings.dart';
+import 'package:almuslim/widgets/alert-with-data-radiobutton.dart';
 import 'package:flutter/material.dart';
 import 'package:almuslim/widgets/settings-title.dart';
 import 'package:hive/hive.dart';
@@ -112,12 +115,29 @@ class _SettingsHomeState extends State<SettingsHome> {
                               icon: Icons.language,
                               headingText: "Languages",
                               hasBorder: true,
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertRadioButtonWithData(
+                                  title: "Set language",
+                                  data: {'english': "English", 'turkish': "Turkish", 'bengali': "Bengali", 'urdu': "Urdu"},
+                                  box: widget.box,
+                                  dataKey: "language",
+                                ),
+                              ),
                             ),
                             SettingsTitle(
                               icon: Icons.design_services,
                               headingText: "Themes",
                               hasBorder: false,
-                              onTap: () => {print("print something")},
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (BuildContext context) => AlertRadioButtonWithData(
+                                  title: "Set theme",
+                                  data: {'light': "Light", 'dark': "Dark"},
+                                  box: widget.box,
+                                  dataKey: "theme",
+                                ),
+                              ),
                             ),
                           ],
                         ),

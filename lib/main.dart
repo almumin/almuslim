@@ -13,11 +13,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'modules/notifications.dart';
 
-void callbackDispatcher() {
-}
+void callbackDispatcher() {}
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
@@ -57,7 +55,6 @@ Future<void> main() async {
   // GEOLocation Starts ## package geolocator is in pubspec but not used anywhere
   List<Placemark> placemarks = await placemarkFromCoordinates(
       _locationData.latitude, _locationData.longitude);
-  print(placemarks.last.name);
   // GEOLocation Ends
 
   runApp(new MaterialApp(

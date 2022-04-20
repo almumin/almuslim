@@ -76,13 +76,13 @@ class _HomeViewState extends State<HomeView> {
             ),
           ),
           backgroundColor: Colors.white,
-          /*leading: InkWell(
+          leading: InkWell(
               child: Icon(
                 Icons.settings,
                 color: Colors.black,
               ),
             onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome())) },
-          ),*/
+          ),
         ),
         backgroundColor: Colors.grey.shade100,
         body: ListView(children: [
