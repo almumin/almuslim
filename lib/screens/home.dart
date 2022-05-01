@@ -81,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                 Icons.settings,
                 color: Colors.black,
               ),
-            onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome())) },
+            onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome(box: widget.box,))) },
           ),
         ),
         backgroundColor: Colors.grey.shade100,
