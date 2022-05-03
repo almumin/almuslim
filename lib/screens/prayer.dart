@@ -29,8 +29,9 @@ class Prayer extends StatelessWidget {
       Coordinates(locationData.latitude, locationData.longitude),
       method,
     );
-
+    var theme = this.box.get('theme');
     return Scaffold(
+      backgroundColor: themeSet[theme]["backgroundColor"],
       appBar: AppBar(
         title: Text("Prayer times"),
         backgroundColor: baseGreenColor,

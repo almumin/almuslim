@@ -33,8 +33,9 @@ class _AlertRadioButtonWithDataState extends State<AlertRadioButtonWithData> {
                 title: Text(widget.data.values.elementAt(i)),
                 value: widget.data.keys.elementAt(i),
                 groupValue: _currentValue,
-                selected:
-                    widget.data.keys.elementAt(i) == _currentValue ? true : false,
+                selected: widget.data.keys.elementAt(i) == _currentValue
+                    ? true
+                    : false,
                 activeColor: baseGreenColor,
                 onChanged: (String value) {
                   setState(() {

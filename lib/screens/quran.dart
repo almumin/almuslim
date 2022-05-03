@@ -48,7 +48,6 @@ class _QuranHomeState extends State<QuranHome>
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
-              //Text("Quran Home"),
               SurahList(),
               Text("Quran Secondary"),
             ]),

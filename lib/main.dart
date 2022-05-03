@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:almuslim/modules/app-context.dart';
 import 'package:almuslim/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +21,7 @@ Future<void> main() async {
   Hive.init(directory.path);
   Random random = new Random();
   int randomNumber = 1 + random.nextInt(TotalAyah - 1);
-  print("Random Ayah number: ${randomNumber}");
+  print("Random Ayah number: $randomNumber");
 
   var box = await Hive.openBox("almuslim");
   box.put('dailyAyah', randomNumber.toString());
@@ -55,14 +56,20 @@ Future<void> main() async {
       _locationData.latitude, _locationData.longitude);
   // GEOLocation Ends
 
-  runApp(new MaterialApp(
-    home: Provider<DBProvider>(
-      create: (_) => DBProvider(),
-      child: HomeView(
-        box: box,
-        locationData: _locationData,
-        placemarks: placemarks,
-      ),
-    ),
+
+  runApp(StreamBuilder<Object>(
+    stream: null,
+    builder: (context, snapshot) {
+      return new MaterialApp(
+        home: Provider<DBProvider>(
+          create: (_) => DBProvider(),
+          child: HomeView(
+            box: box,
+            locationData: _locationData,
+            placemarks: placemarks,
+          ),
+        ),
+      );
+    }
   ));
 }

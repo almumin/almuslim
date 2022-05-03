@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class HomeIcon extends StatelessWidget {
   final String iconPath;
   final String text;
+  final Color textColor;
   final Function onTapRun;
 
   const HomeIcon({
     Key key,
     this.iconPath,
-    this.text, this.onTapRun,
+    this.text, this.onTapRun, this.textColor,
   }) : super(key: key);
 
   @override
@@ -26,7 +27,12 @@ class HomeIcon extends StatelessWidget {
                 width: width * .58 / 4,
                 fit: BoxFit.fitWidth,
               ),
-              Text(text)
+              Text(
+                  text,
+                style: TextStyle(
+                  color: textColor
+                ),
+              )
             ],
           ),
         ),

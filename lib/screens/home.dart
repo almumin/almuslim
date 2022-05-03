@@ -16,6 +16,9 @@ import 'package:almuslim/widgets/daily-ayah.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../modules/app-context.dart';
+import '../modules/constants.dart';
+
 class HomeView extends StatefulWidget {
   final Box box;
   final LocationData locationData;
@@ -31,6 +34,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   DateTime today;
   Timer _everySecond;
+
+  // AppContext appContext = new AppContext(language, theme);
 
   @override
   void initState() {
@@ -53,6 +58,7 @@ class _HomeViewState extends State<HomeView> {
     }
     var ayah = widget.box.get('dailyAyah');
     var dbProvider = Provider.of<DBProvider>(context);
+    var theme = widget.box.get('theme');
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -75,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: themeSet[theme]["backgroundColor"],
           leading: InkWell(
               child: Icon(
                 Icons.settings,
@@ -84,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
             onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsHome(box: widget.box,))) },
           ),
         ),
-        backgroundColor: Colors.grey.shade100,
+        backgroundColor: themeSet[theme]["backgroundColor"],
         body: ListView(children: [
           Stack(children: [
             Container(
@@ -135,6 +141,7 @@ class _HomeViewState extends State<HomeView> {
                     HomeIcon(
                       iconPath: "013-prayer-mat.png",
                       text: "Prayer",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {
                         Navigator.push(
                             context,
@@ -149,6 +156,7 @@ class _HomeViewState extends State<HomeView> {
                     HomeIcon(
                       iconPath: "005-Quran.png",
                       text: "Quran",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {
                         Navigator.push(
                             context,
@@ -159,6 +167,7 @@ class _HomeViewState extends State<HomeView> {
                     HomeIcon(
                       iconPath: "001-allah.png",
                       text: "99 names",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {
                         Navigator.push(
                             context,
@@ -169,6 +178,7 @@ class _HomeViewState extends State<HomeView> {
                     HomeIcon(
                       iconPath: "settings.png",
                       text: "Settings",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {
                         Navigator.push(
                             context,
@@ -185,21 +195,25 @@ class _HomeViewState extends State<HomeView> {
                     HomeIcon(
                       iconPath: "003-candle.png",
                       text: "Hadith",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "halal-sign.png",
                       text: "Halal",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "dua-hands.png",
                       text: "Duas",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {},
                     ),
                     HomeIcon(
                       iconPath: "023-date-palm.png",
                       text: "Reminder",
+                      textColor: themeSet[theme]["textColor"],
                       onTapRun: () => {
                         Navigator.push(
                             context,
