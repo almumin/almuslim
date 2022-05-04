@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 
+import '../modules/constants.dart';
+
 class QuranHome extends StatefulWidget {
+  final Box box;
+
+  const QuranHome({Key key, this.box}) : super(key: key);
+
   @override
   _QuranHomeState createState() => _QuranHomeState();
 }
@@ -27,13 +33,14 @@ class _QuranHomeState extends State<QuranHome>
 
   @override
   Widget build(BuildContext context) {
+    var theme = widget.box.get('theme');
     return Provider<DBProvider>(
       create: (_) => DBProvider(),
       //dispose: (_, value) => value.dispose(),
       child: Scaffold(
         appBar: AppBar(
           title: Text("Quran"),
-          backgroundColor: Colors.blueGrey.shade900,
+          backgroundColor: themeSet[theme]["secondaryBaseColor"],
           bottom: new TabBar(controller: controller, tabs: [
             new Tab(
               icon: new Icon(Icons.menu_book_outlined),
@@ -48,7 +55,7 @@ class _QuranHomeState extends State<QuranHome>
             physics: const BouncingScrollPhysics(
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
-              SurahList(),
+              SurahList(box: widget.box,),
               Text("Quran Secondary"),
             ]),
       ),
