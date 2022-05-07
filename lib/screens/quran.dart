@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 
+import '../database/store.dart';
 import '../modules/constants.dart';
 
 class QuranHome extends StatefulWidget {
   final Box box;
+  final ObjectBox objectBox;
 
-  const QuranHome({Key key, this.box}) : super(key: key);
+  const QuranHome({Key key, this.box, this.objectBox}) : super(key: key);
 
   @override
   _QuranHomeState createState() => _QuranHomeState();

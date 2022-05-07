@@ -1,5 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
+import 'package:almuslim/models/quran-entity.dart';
+import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
@@ -16,6 +20,8 @@ import 'package:almuslim/widgets/daily-ayah.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 
+import '../database/store.dart';
+import '../models/constants.dart';
 import '../modules/app-context.dart';
 import '../modules/constants.dart';
 
@@ -23,8 +29,9 @@ class HomeView extends StatefulWidget {
   final Box box;
   final LocationData locationData;
   final List<Placemark> placemarks;
+  final ObjectBox objectBox;
 
-  HomeView({Key key, @required this.box, this.locationData, this.placemarks})
+  HomeView({Key key, @required this.box, this.locationData, this.placemarks, this.objectBox})
       : super(key: key);
 
   @override
@@ -36,6 +43,9 @@ class _HomeViewState extends State<HomeView> {
   Timer _everySecond;
 
   // AppContext appContext = new AppContext(language, theme);
+
+
+
 
   @override
   void initState() {
@@ -52,11 +62,45 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    var ayah = widget.box.get('dailyAyah');
+    var userBox = widget.objectBox.store.box<QuranAyah>();
+    print("userBox.get(1)");
+    print(userBox.get(TotalAyah).text);
+
+    /*var count = 1;
+    new HttpClient().getUrl(Uri.parse('https://tanzil.net/pub/download/index.php?marks=true&sajdah=true&tatweel=true&quranType=uthmani&outType=txt-2&agree=true'))
+        .then((HttpClientRequest request) => request.close())
+        .then((HttpClientResponse response) => response.transform(new Utf8Decoder())
+        .transform(new LineSplitter())
+        .listen((String line) {
+          if (count == 1){
+            print("Started migration");
+          }
+          if (count <= TotalAyah) {
+            var quranLine = line.split('|');
+            var quran = new QuranAyah();
+            quran.id = count;
+            quran.surahNumber = int.parse(quranLine[0]);
+            quran.ayahNumber = int.parse(quranLine[1]);
+            quran.text = quranLine[2];
+            userBox.put(quran);
+            *//*print('Surah number: ${quranLine[0]}');
+            print('Ayah number: ${quranLine[1]}');
+            print('${quranLine[2]}');*//*
+            count++;
+          }
+          if (count == TotalAyah){
+            print("Ended migration. With ${count} lines");
+          }
+        },));*/
+
+
+
     HijriCalendar _hijriToday = new HijriCalendar.now();
     if (today == null){
       today = DateTime.now();
     }
-    var ayah = widget.box.get('dailyAyah');
+
     var dbProvider = Provider.of<DBProvider>(context);
     var theme = widget.box.get('theme');
     return Scaffold(
@@ -161,7 +205,7 @@ class _HomeViewState extends State<HomeView> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => QuranHome(box: widget.box,)))
+                                builder: (context) => QuranHome(box: widget.box, objectBox: widget.objectBox,)))
                       },
                     ),
                     HomeIcon(

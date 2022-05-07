@@ -10,7 +10,10 @@ import 'dart:math';
 import 'package:almuslim/models/constants.dart';
 import 'package:location/location.dart' as loc;
 import 'package:geocoding/geocoding.dart';
+import 'database/store.dart';
+import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
+import 'objectbox.g.dart';
 
 void callbackDispatcher() {}
 
@@ -25,6 +28,10 @@ Future<void> main() async {
 
   var box = await Hive.openBox("almuslim");
   box.put('dailyAyah', randomNumber.toString());
+
+  var objectBox = await ObjectBox.create();
+
+  final userBox = objectBox.store.box<QuranAyah>();
 
   // Location Starts
   loc.Location location = new loc.Location();
@@ -56,20 +63,19 @@ Future<void> main() async {
       _locationData.latitude, _locationData.longitude);
   // GEOLocation Ends
 
-
   runApp(StreamBuilder<Object>(
-    stream: null,
-    builder: (context, snapshot) {
-      return new MaterialApp(
-        home: Provider<DBProvider>(
-          create: (_) => DBProvider(),
-          child: HomeView(
-            box: box,
-            locationData: _locationData,
-            placemarks: placemarks,
+      stream: null,
+      builder: (context, snapshot) {
+        return new MaterialApp(
+          home: Provider<DBProvider>(
+            create: (_) => DBProvider(),
+            child: HomeView(
+              box: box,
+              locationData: _locationData,
+              placemarks: placemarks,
+              objectBox: objectBox,
+            ),
           ),
-        ),
-      );
-    }
-  ));
+        );
+      }));
 }
