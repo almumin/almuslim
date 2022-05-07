@@ -43,10 +43,6 @@ class _HomeViewState extends State<HomeView> {
   Timer _everySecond;
 
   // AppContext appContext = new AppContext(language, theme);
-
-
-
-
   @override
   void initState() {
     super.initState();
@@ -64,35 +60,39 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     var ayah = widget.box.get('dailyAyah');
     var userBox = widget.objectBox.store.box<QuranAyah>();
-    print("userBox.get(1)");
-    print(userBox.get(TotalAyah).text);
-
-    /*var count = 1;
-    new HttpClient().getUrl(Uri.parse('https://tanzil.net/pub/download/index.php?marks=true&sajdah=true&tatweel=true&quranType=uthmani&outType=txt-2&agree=true'))
-        .then((HttpClientRequest request) => request.close())
-        .then((HttpClientResponse response) => response.transform(new Utf8Decoder())
-        .transform(new LineSplitter())
-        .listen((String line) {
-          if (count == 1){
-            print("Started migration");
-          }
-          if (count <= TotalAyah) {
-            var quranLine = line.split('|');
-            var quran = new QuranAyah();
-            quran.id = count;
-            quran.surahNumber = int.parse(quranLine[0]);
-            quran.ayahNumber = int.parse(quranLine[1]);
-            quran.text = quranLine[2];
-            userBox.put(quran);
-            *//*print('Surah number: ${quranLine[0]}');
-            print('Ayah number: ${quranLine[1]}');
-            print('${quranLine[2]}');*//*
-            count++;
-          }
-          if (count == TotalAyah){
-            print("Ended migration. With ${count} lines");
-          }
-        },));*/
+    //print("userBox.get(1)");
+    //print(userBox.get(TotalAyah).text);
+    print("Migration status: " + widget.box.get("migration"));
+    if (widget.box.get("migration") != "done") {
+      var count = 1;
+      new HttpClient().getUrl(Uri.parse(
+          'https://tanzil.net/pub/download/index.php?marks=true&sajdah=true&tatweel=true&quranType=uthmani&outType=txt-2&agree=true'))
+          .then((HttpClientRequest request) => request.close())
+          .then((HttpClientResponse response) =>
+          response.transform(new Utf8Decoder())
+              .transform(new LineSplitter())
+              .listen((String line) {
+            if (count == 1) {
+              print("Started migration");
+            }
+            if (count <= TotalAyah) {
+              var quranLine = line.split('|');
+              var quran = new QuranAyah();
+              quran.id = count;
+              quran.surahNumber = int.parse(quranLine[0]);
+              quran.ayahNumber = int.parse(quranLine[1]);
+              quran.text = quranLine[2];
+              userBox.put(quran);
+              count++;
+            }
+            if (count == TotalAyah) {
+              print("Ended migration. With ${count} lines");
+            }
+          },).onDone(() {
+            print("Migration done");
+            widget.box.put("migration", "done");
+          }));
+    }
 
 
 

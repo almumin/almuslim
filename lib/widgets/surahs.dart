@@ -4,7 +4,6 @@ import 'package:almuslim/screens/surah-individual.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-
 import '../modules/constants.dart';
 
 class SurahList extends StatelessWidget {

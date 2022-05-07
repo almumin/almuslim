@@ -1,4 +1,5 @@
 import 'package:almuslim/data/quran.dart';
+import 'package:almuslim/widgets/quran-secondary.dart';
 import 'package:almuslim/widgets/surahs.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +59,7 @@ class _QuranHomeState extends State<QuranHome>
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
               SurahList(box: widget.box,),
-              Text("Quran Secondary"),
+              QuranSecondary(objectBox: widget.objectBox,),
             ]),
       ),
     );
