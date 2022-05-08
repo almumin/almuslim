@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:almuslim/modules/app-context.dart';
+import 'package:almuslim/models/app-context.dart';
 import 'package:almuslim/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

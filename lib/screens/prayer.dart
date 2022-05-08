@@ -16,19 +16,20 @@ class Prayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ayah = box.get('dailyAyah');
-    // TODO: update the static calculation method selection to dynamic
-    var method = box.get('calculationMethod');
-    if (method == null) {
-      box.put('calculationMethod', 'north_america');
+    if (box.get('calculationMethod') == null) {
+      box.put('calculationMethod', defaultCalculationMethod);
     }
-    print("ayah");
-    print(ayah);
-    print(method);
+    var method = box.get('calculationMethod');
+
+    if (box.get('madhab') == null) {
+      box.put('madhab', defaultMadhab);
+    }
+    var madhab = box.get('madhab');
+
     PrayerTimes pTimes = getPrayerTimes(
-      Coordinates(locationData.latitude, locationData.longitude),
-      method,
-    );
+        Coordinates(locationData.latitude, locationData.longitude),
+        method,
+        madhab);
     var theme = this.box.get('theme');
     return Scaffold(
       backgroundColor: themeSet[theme]["backgroundColor"],
@@ -49,6 +50,11 @@ class Prayer extends StatelessWidget {
                   waqt: "Fajr",
                   waqtPrayerTime: pTimes.fajr,
                   icon: Icons.wb_sunny_outlined,
+                ),
+                PrayerColumn(
+                  waqt: "Sunrise",
+                  waqtPrayerTime: pTimes.sunrise,
+                  icon: Icons.sunny,
                 ),
                 PrayerColumn(
                   waqt: "Duhr",
@@ -80,16 +86,13 @@ class Prayer extends StatelessWidget {
 }
 
 PrayerTimes getPrayerTimes(
-    Coordinates myCoordinates, String calculationMethod) {
+    Coordinates myCoordinates, String calculationMethod, Madhab madhab) {
   // Replace with your own location lat, lng.
   // CalculationParameters params = CalculationMethod.karachi.getParameters();
   CalculationParameters params =
       CalculationMethod.values.byName(calculationMethod).getParameters();
 
-  print("params.method");
-  print(params.method);
-  print(CalculationMethod.values);
-  params.madhab = Madhab.shafi;
+  params.madhab = madhab;
   return PrayerTimes.today(myCoordinates, params);
 }
 
