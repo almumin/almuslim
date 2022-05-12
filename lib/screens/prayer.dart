@@ -25,11 +25,13 @@ class Prayer extends StatelessWidget {
       box.put('madhab', defaultMadhab);
     }
     var madhab = box.get('madhab');
-
+    print(madhab);
     PrayerTimes pTimes = getPrayerTimes(
         Coordinates(locationData.latitude, locationData.longitude),
         method,
         madhab);
+    print(pTimes);
+    print(pTimes);
     var theme = this.box.get('theme');
     return Scaffold(
       backgroundColor: themeSet[theme]["backgroundColor"],
@@ -86,13 +88,16 @@ class Prayer extends StatelessWidget {
 }
 
 PrayerTimes getPrayerTimes(
-    Coordinates myCoordinates, String calculationMethod, Madhab madhab) {
-  // Replace with your own location lat, lng.
-  // CalculationParameters params = CalculationMethod.karachi.getParameters();
+    Coordinates myCoordinates, String calculationMethod, String madhab) {
   CalculationParameters params =
       CalculationMethod.values.byName(calculationMethod).getParameters();
 
-  params.madhab = madhab;
+  if (madhab == Madhab.shafi.toString()) {
+    params.madhab = Madhab.shafi;
+  } else {
+    params.madhab = Madhab.hanafi;
+  }
+
   return PrayerTimes.today(myCoordinates, params);
 }
 

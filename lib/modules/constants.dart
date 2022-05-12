@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 const Color baseGreenColor = Color(0XFF50bb64);
 const String defaultCalculationMethod = 'north_america';
-const Madhab defaultMadhab = Madhab.shafi;
+final String defaultMadhab = Madhab.shafi.toString();
 
 const themeSet = {
   'lightTheme': {
