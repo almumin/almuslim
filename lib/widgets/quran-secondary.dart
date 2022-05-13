@@ -25,7 +25,12 @@ class _QuranSecondaryState extends State<QuranSecondary> {
     return ListView.builder(
         itemCount: results.length,
         itemBuilder: (_, int index) {
-          return Text(results[index].text);
+          return Column(
+            children: [
+              Text(results[index].text),
+              Text(results[index].englishText),
+            ],
+          );
         });
   }
 }

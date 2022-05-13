@@ -5,13 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
+import '../database/store.dart';
+import '../models/quran-entity.dart';
 import '../modules/constants.dart';
+import '../objectbox.g.dart' as ob;
 
 class SurahIndividual extends StatefulWidget {
   final Surah surah;
   final Box box;
+  final ObjectBox objectBox;
 
-  const SurahIndividual({Key key, @required this.surah, this.box}) : super(key: key);
+  const SurahIndividual(
+      {Key key, @required this.surah, this.box, this.objectBox})
+      : super(key: key);
 
   @override
   _SurahIndividualState createState() => _SurahIndividualState();
@@ -23,13 +29,14 @@ class _SurahIndividualState extends State<SurahIndividual> {
   @override
   Widget build(BuildContext context) {
     var theme = widget.box.get('theme');
+
     return Provider<DBProvider>(
       create: (context) => DBProvider(),
       //dispose: (context, value) => value.dispose(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-              "Surah",
+            "Surah",
             style: TextStyle(
               color: themeSet[theme]["textColor"],
             ),
@@ -39,22 +46,22 @@ class _SurahIndividualState extends State<SurahIndividual> {
         body: Container(
           color: themeSet[theme]["backgroundColor"],
           child: ListView(
-            physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
             controller: _controller,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color(0XFF50bb64),
-                      borderRadius: BorderRadius.circular(8)
-                  ),
+                      color: Color(0XFF50bb64),
+                      borderRadius: BorderRadius.circular(8)),
                   child: Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       children: [
                         Text(
-                            "${widget.surah.id}. ${widget.surah.latin}",
+                          "${widget.surah.id}. ${widget.surah.latin}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
@@ -83,8 +90,11 @@ class _SurahIndividualState extends State<SurahIndividual> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
-              SurahIndividualWithAyahs(surahInfo: widget.surah, box: widget.box),
+              SizedBox(
+                height: 10,
+              ),
+              SurahIndividualWithAyahs(
+                  surahInfo: widget.surah, box: widget.box, objectBox: widget.objectBox,),
             ],
           ),
         ),

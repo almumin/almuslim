@@ -7,4 +7,5 @@ class QuranAyah {
   int surahNumber;
   int ayahNumber;
   String text;
+  String englishText;
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:almuslim/methods/populate-data.dart';
 import 'package:almuslim/models/quran-entity.dart';
 import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:almuslim/screens/names-of-Allah.dart';
@@ -59,49 +60,20 @@ class _HomeViewState extends State<HomeView> {
         today = DateTime.now();
       });
     });
+
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     var ayah = widget.box.get('dailyAyah');
-    var userBox = widget.objectBox.store.box<QuranAyah>();
-    //print("userBox.get(1)");
-    //print(userBox.get(TotalAyah).text);
+    var quranAyahBox = widget.objectBox.store.box<QuranAyah>();
     print("Migration status: " + widget.box.get("migration"));
-    if (widget.box.get("migration") != "done") {
-      var count = 1;
-      new HttpClient()
-          .getUrl(Uri.parse(
-              'https://tanzil.net/pub/download/index.php?marks=true&sajdah=true&tatweel=true&quranType=uthmani&outType=txt-2&agree=true'))
-          .then((HttpClientRequest request) => request.close())
-          .then((HttpClientResponse response) => response
-                  .transform(new Utf8Decoder())
-                  .transform(new LineSplitter())
-                  .listen(
-                (String line) {
-                  if (count == 1) {
-                    widget.box.put("migration", "ongoing");
-                    userBox.removeAll();
-                    print("Started migration");
-                  }
-                  if (count <= TotalAyah) {
-                    var quranLine = line.split('|');
-                    var quran = new QuranAyah();
-                    quran.id = count;
-                    quran.surahNumber = int.parse(quranLine[0]);
-                    quran.ayahNumber = int.parse(quranLine[1]);
-                    quran.text = quranLine[2];
-                    userBox.put(quran);
-                    count++;
-                  }
-                  if (count == TotalAyah) {
-                    print("Ended migration. With ${count} lines");
-                  }
-                },
-              ).onDone(() {
-                print("Migration done");
-                widget.box.put("migration", "done");
-              }));
+    InitializeApp init = new InitializeApp(widget.box, quranAyahBox);
+    //widget.box.put("migration", "a");
+    if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
+      init.PopulateQuranData();
     }
 
     HijriCalendar _hijriToday = new HijriCalendar.now();
@@ -311,4 +283,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ]));
   }
+
+
 }

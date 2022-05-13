@@ -4,12 +4,14 @@ import 'package:almuslim/screens/surah-individual.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import '../database/store.dart';
 import '../modules/constants.dart';
 
 class SurahList extends StatelessWidget {
   final Box box;
+  final ObjectBox objectBox;
 
-  const SurahList({Key key, this.box}) : super(key: key);
+  const SurahList({Key key, this.box, this.objectBox}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class SurahList extends StatelessWidget {
                             builder: (context) => SurahIndividual(
                                   surah: surahs[index],
                                   box: this.box,
+                                  objectBox: this.objectBox,
                                 )))
                   },
                   child: ListTile(

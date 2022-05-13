@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7764714462544937502",
-      "lastPropertyId": "4:1642707768174414378",
+      "lastPropertyId": "5:823086920123750362",
       "name": "QuranAyah",
       "properties": [
         {
@@ -28,12 +28,51 @@
           "id": "4:1642707768174414378",
           "name": "text",
           "type": 9
+        },
+        {
+          "id": "5:823086920123750362",
+          "name": "englishText",
+          "type": 9
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:7214744480193890939",
+      "lastPropertyId": "5:7474378556238101246",
+      "name": "AppContext",
+      "properties": [
+        {
+          "id": "1:6107345605398642440",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:3833497024695475614",
+          "name": "language",
+          "type": 9
+        },
+        {
+          "id": "3:1013211941853219768",
+          "name": "theme",
+          "type": 9
+        },
+        {
+          "id": "4:4505056168950788936",
+          "name": "calculationMethod",
+          "type": 9
+        },
+        {
+          "id": "5:7474378556238101246",
+          "name": "madhab",
+          "type": 9
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:7764714462544937502",
+  "lastEntityId": "2:7214744480193890939",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
