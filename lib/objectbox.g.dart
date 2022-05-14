@@ -90,7 +90,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(3, 4193584269556766753),
       name: 'Surahs',
-      lastPropertyId: const IdUid(7, 2633017384070580102),
+      lastPropertyId: const IdUid(13, 5656218785544262904),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -98,11 +98,6 @@ final _entities = <ModelEntity>[
             name: 'id',
             type: 6,
             flags: 129),
-        ModelProperty(
-            id: const IdUid(2, 835934456095440465),
-            name: 'name',
-            type: 9,
-            flags: 0),
         ModelProperty(
             id: const IdUid(3, 7945993237969536718),
             name: 'ayah',
@@ -119,13 +114,33 @@ final _entities = <ModelEntity>[
             type: 9,
             flags: 0),
         ModelProperty(
-            id: const IdUid(6, 3359417456112261306),
-            name: 'startAyah',
+            id: const IdUid(8, 8613143732554671805),
+            name: 'arabic',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 9128014178088181167),
+            name: 'arabicShort',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 7861016389685188317),
+            name: 'english',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(11, 3672222303442107672),
+            name: 'latin',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(12, 6539070021196121660),
+            name: 'location',
             type: 6,
             flags: 0),
         ModelProperty(
-            id: const IdUid(7, 2633017384070580102),
-            name: 'endAyah',
+            id: const IdUid(13, 5656218785544262904),
+            name: 'sajda',
             type: 6,
             flags: 0)
       ],
@@ -159,7 +174,11 @@ ModelDefinition getObjectBoxModel() {
       lastSequenceId: const IdUid(0, 0),
       retiredEntityUids: const [],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        835934456095440465,
+        3359417456112261306,
+        2633017384070580102
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
@@ -261,18 +280,28 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (Surahs object, fb.Builder fbb) {
-          final nameOffset =
-              object.name == null ? null : fbb.writeString(object.name);
           final typeOffset =
               object.type == null ? null : fbb.writeString(object.type);
-          fbb.startTable(8);
+          final arabicOffset =
+              object.arabic == null ? null : fbb.writeString(object.arabic);
+          final arabicShortOffset = object.arabicShort == null
+              ? null
+              : fbb.writeString(object.arabicShort);
+          final englishOffset =
+              object.english == null ? null : fbb.writeString(object.english);
+          final latinOffset =
+              object.latin == null ? null : fbb.writeString(object.latin);
+          fbb.startTable(14);
           fbb.addInt64(0, object.id ?? 0);
-          fbb.addOffset(1, nameOffset);
           fbb.addInt64(2, object.ayah);
           fbb.addInt64(3, object.revelationOrder);
           fbb.addOffset(4, typeOffset);
-          fbb.addInt64(5, object.startAyah);
-          fbb.addInt64(6, object.endAyah);
+          fbb.addOffset(7, arabicOffset);
+          fbb.addOffset(8, arabicShortOffset);
+          fbb.addOffset(9, englishOffset);
+          fbb.addOffset(10, latinOffset);
+          fbb.addInt64(11, object.location);
+          fbb.addInt64(12, object.sajda);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
@@ -283,18 +312,22 @@ ModelDefinition getObjectBoxModel() {
           final object = Surahs(
               id: const fb.Int64Reader()
                   .vTableGetNullable(buffer, rootOffset, 4),
-              name: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 6),
+              arabic: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 18),
+              arabicShort: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 20),
+              english: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 22),
+              latin: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24),
               ayah: const fb.Int64Reader()
                   .vTableGetNullable(buffer, rootOffset, 8),
               revelationOrder: const fb.Int64Reader()
                   .vTableGetNullable(buffer, rootOffset, 10),
-              type: const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 12),
-              startAyah: const fb.Int64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 14),
-              endAyah: const fb.Int64Reader()
-                  .vTableGetNullable(buffer, rootOffset, 16));
+              location: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 26),
+              type: const fb.StringReader(asciiOptimization: true).vTableGetNullable(buffer, rootOffset, 12),
+              sajda: const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 28));
 
           return object;
         })
@@ -353,24 +386,34 @@ class Surahs_ {
   /// see [Surahs.id]
   static final id = QueryIntegerProperty<Surahs>(_entities[2].properties[0]);
 
-  /// see [Surahs.name]
-  static final name = QueryStringProperty<Surahs>(_entities[2].properties[1]);
-
   /// see [Surahs.ayah]
-  static final ayah = QueryIntegerProperty<Surahs>(_entities[2].properties[2]);
+  static final ayah = QueryIntegerProperty<Surahs>(_entities[2].properties[1]);
 
   /// see [Surahs.revelationOrder]
   static final revelationOrder =
-      QueryIntegerProperty<Surahs>(_entities[2].properties[3]);
+      QueryIntegerProperty<Surahs>(_entities[2].properties[2]);
 
   /// see [Surahs.type]
-  static final type = QueryStringProperty<Surahs>(_entities[2].properties[4]);
+  static final type = QueryStringProperty<Surahs>(_entities[2].properties[3]);
 
-  /// see [Surahs.startAyah]
-  static final startAyah =
-      QueryIntegerProperty<Surahs>(_entities[2].properties[5]);
+  /// see [Surahs.arabic]
+  static final arabic = QueryStringProperty<Surahs>(_entities[2].properties[4]);
 
-  /// see [Surahs.endAyah]
-  static final endAyah =
-      QueryIntegerProperty<Surahs>(_entities[2].properties[6]);
+  /// see [Surahs.arabicShort]
+  static final arabicShort =
+      QueryStringProperty<Surahs>(_entities[2].properties[5]);
+
+  /// see [Surahs.english]
+  static final english =
+      QueryStringProperty<Surahs>(_entities[2].properties[6]);
+
+  /// see [Surahs.latin]
+  static final latin = QueryStringProperty<Surahs>(_entities[2].properties[7]);
+
+  /// see [Surahs.location]
+  static final location =
+      QueryIntegerProperty<Surahs>(_entities[2].properties[8]);
+
+  /// see [Surahs.sajda]
+  static final sajda = QueryIntegerProperty<Surahs>(_entities[2].properties[9]);
 }

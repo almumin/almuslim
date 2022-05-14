@@ -59,14 +59,14 @@ class SurahList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      surah.name,
+                      surah.english,
                       style: TextStyle(
                         fontSize: 15,
                         color: themeSet[theme]["textColor"],
                       ),
                     ),
                     Text(
-                      "${surah.name} (${surah.ayah.toString()})",
+                      "${surah.english} (${surah.ayah.toString()})",
                       style: TextStyle(
                           fontSize: 11,
                           color: themeSet[theme]["textColor"]),
@@ -74,7 +74,7 @@ class SurahList extends StatelessWidget {
                   ],
                 ),
                 trailing: Text(
-                  surah.name,
+                  surah.arabicShort,
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.green.shade500,

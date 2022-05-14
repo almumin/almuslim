@@ -73,7 +73,7 @@
     },
     {
       "id": "3:4193584269556766753",
-      "lastPropertyId": "7:2633017384070580102",
+      "lastPropertyId": "13:5656218785544262904",
       "name": "Surahs",
       "properties": [
         {
@@ -81,11 +81,6 @@
           "name": "id",
           "type": 6,
           "flags": 129
-        },
-        {
-          "id": "2:835934456095440465",
-          "name": "name",
-          "type": 9
         },
         {
           "id": "3:7945993237969536718",
@@ -103,13 +98,33 @@
           "type": 9
         },
         {
-          "id": "6:3359417456112261306",
-          "name": "startAyah",
+          "id": "8:8613143732554671805",
+          "name": "arabic",
+          "type": 9
+        },
+        {
+          "id": "9:9128014178088181167",
+          "name": "arabicShort",
+          "type": 9
+        },
+        {
+          "id": "10:7861016389685188317",
+          "name": "english",
+          "type": 9
+        },
+        {
+          "id": "11:3672222303442107672",
+          "name": "latin",
+          "type": 9
+        },
+        {
+          "id": "12:6539070021196121660",
+          "name": "location",
           "type": 6
         },
         {
-          "id": "7:2633017384070580102",
-          "name": "endAyah",
+          "id": "13:5656218785544262904",
+          "name": "sajda",
           "type": 6
         }
       ],
@@ -124,7 +139,11 @@
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    835934456095440465,
+    3359417456112261306,
+    2633017384070580102
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

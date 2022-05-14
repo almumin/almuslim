@@ -14,18 +14,8 @@ import 'package:hive/hive.dart';
 class InitializeApp {
   final Box hiveStore;
   final ObjectBox objectBox;
-  /*final ob.Box<QuranAyah> quranObjectBoxStore;
-  final ob.Box<Surahs> surahObjectBoxStore;*/
 
   InitializeApp(this.hiveStore, this.objectBox/*, this.quranObjectBoxStore, this.surahObjectBoxStore*/);
-
-
-  @override
-  void initState() {
-
-
-  }
-
 
   Future<String> loadFile(BuildContext context, String fileName) async {
     String jsonStringValues = await DefaultAssetBundle.of(context).loadString(fileName);
@@ -34,30 +24,33 @@ class InitializeApp {
 
   void PopulateQuranData(BuildContext context) async{
     var surahObjectBox = objectBox.store.box<Surahs>();
-    String jsonStringValues = await loadFile(context, "assets/data/surah.json");
-    Map<String, dynamic> mappedJson = jsonDecode(jsonStringValues);
-    Map<String, dynamic> _localizedValues = mappedJson.map((key, value) => MapEntry(key, value));
+    String jsonStringValues = await loadFile(context, "assets/data/surahs.json");
+    List<dynamic> mappedJson = jsonDecode(jsonStringValues);
+
     var count = 1;
-    _localizedValues.forEach((key, value) {
+    mappedJson.forEach((value) {
       if (count == 1) {
         this.hiveStore.put("migration", "ongoing");
         surahObjectBox.removeAll();
         print("Started Surah migration");
       }
-      if (count <= _localizedValues.length) {
+      if (count <= mappedJson.length) {
         Surahs surah = Surahs(
-          id: count,
-          name: value["name"],
-          ayah: value["nAyah"],
-          revelationOrder: value["revelationOrder"],
+          id: value["id"],
+          arabic: value["arabic"],
+          arabicShort: value["arabicShort"],
+          english: value["english"],
+          latin: value["latin"],
+          ayah: value["ayah"],
+          revelationOrder: int.parse(value["revelationOrder"]),
+          location: value["location"],
           type: value["type"],
-          startAyah: value["start"],
-          endAyah: value["end"],
+          sajda: value["sajda"],
         );
         surahObjectBox.put(surah);
         count++;
       }
-      if (count == _localizedValues.length) {
+      if (count == mappedJson.length) {
         print("Ended Surah data migration. With ${count} Surahs");
         this.PopulateQuranAyahData();
       }
@@ -113,7 +106,6 @@ class InitializeApp {
                 .listen(
               (String line) {
                 if (count == 1) {
-                  this.hiveStore.put("migration", "ongoing");
                   print("Started translation migration");
                 }
                 if (count <= TotalAyah) {

@@ -14,12 +14,25 @@ class QuranAyah {
 class Surahs {
   @Id(assignable: true)
   int id;
-  String name;
+  String arabic;
+  String arabicShort;
+  String english;
+  String latin;
   int ayah;
   int revelationOrder;
+  int location;
   String type;
-  int startAyah;
-  int endAyah;
+  int sajda;
 
-  Surahs({this.id, this.name, this.ayah, this.revelationOrder, this.type, this.startAyah, this.endAyah});
+  Surahs(
+      {this.id,
+      this.arabic,
+      this.arabicShort,
+      this.english,
+      this.latin,
+      this.ayah,
+      this.revelationOrder,
+      this.location,
+      this.type,
+      this.sajda});
 }
