@@ -86,6 +86,50 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 4193584269556766753),
+      name: 'Surahs',
+      lastPropertyId: const IdUid(7, 2633017384070580102),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 8577842436994331573),
+            name: 'id',
+            type: 6,
+            flags: 129),
+        ModelProperty(
+            id: const IdUid(2, 835934456095440465),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 7945993237969536718),
+            name: 'ayah',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 9095630420609565526),
+            name: 'revelationOrder',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(5, 5325076825970464319),
+            name: 'type',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 3359417456112261306),
+            name: 'startAyah',
+            type: 6,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 2633017384070580102),
+            name: 'endAyah',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -109,7 +153,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 7214744480193890939),
+      lastEntityId: const IdUid(3, 4193584269556766753),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -207,6 +251,52 @@ ModelDefinition getObjectBoxModel() {
                 .vTableGetNullable(buffer, rootOffset, 12);
 
           return object;
+        }),
+    Surahs: EntityDefinition<Surahs>(
+        model: _entities[2],
+        toOneRelations: (Surahs object) => [],
+        toManyRelations: (Surahs object) => {},
+        getId: (Surahs object) => object.id,
+        setId: (Surahs object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Surahs object, fb.Builder fbb) {
+          final nameOffset =
+              object.name == null ? null : fbb.writeString(object.name);
+          final typeOffset =
+              object.type == null ? null : fbb.writeString(object.type);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id ?? 0);
+          fbb.addOffset(1, nameOffset);
+          fbb.addInt64(2, object.ayah);
+          fbb.addInt64(3, object.revelationOrder);
+          fbb.addOffset(4, typeOffset);
+          fbb.addInt64(5, object.startAyah);
+          fbb.addInt64(6, object.endAyah);
+          fbb.finish(fbb.endTable());
+          return object.id ?? 0;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = Surahs(
+              id: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 4),
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 6),
+              ayah: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              revelationOrder: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 10),
+              type: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 12),
+              startAyah: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 14),
+              endAyah: const fb.Int64Reader()
+                  .vTableGetNullable(buffer, rootOffset, 16));
+
+          return object;
         })
   };
 
@@ -256,4 +346,31 @@ class AppContext_ {
   /// see [AppContext.madhab]
   static final madhab =
       QueryStringProperty<AppContext>(_entities[1].properties[4]);
+}
+
+/// [Surahs] entity fields to define ObjectBox queries.
+class Surahs_ {
+  /// see [Surahs.id]
+  static final id = QueryIntegerProperty<Surahs>(_entities[2].properties[0]);
+
+  /// see [Surahs.name]
+  static final name = QueryStringProperty<Surahs>(_entities[2].properties[1]);
+
+  /// see [Surahs.ayah]
+  static final ayah = QueryIntegerProperty<Surahs>(_entities[2].properties[2]);
+
+  /// see [Surahs.revelationOrder]
+  static final revelationOrder =
+      QueryIntegerProperty<Surahs>(_entities[2].properties[3]);
+
+  /// see [Surahs.type]
+  static final type = QueryStringProperty<Surahs>(_entities[2].properties[4]);
+
+  /// see [Surahs.startAyah]
+  static final startAyah =
+      QueryIntegerProperty<Surahs>(_entities[2].properties[5]);
+
+  /// see [Surahs.endAyah]
+  static final endAyah =
+      QueryIntegerProperty<Surahs>(_entities[2].properties[6]);
 }

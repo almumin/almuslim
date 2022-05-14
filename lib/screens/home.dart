@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:almuslim/methods/populate-data.dart';
 import 'package:almuslim/models/quran-entity.dart';
+import 'package:almuslim/models/surahs.dart';
 import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
@@ -68,12 +69,12 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
 
     var ayah = widget.box.get('dailyAyah');
-    var quranAyahBox = widget.objectBox.store.box<QuranAyah>();
     print("Migration status: " + widget.box.get("migration"));
-    InitializeApp init = new InitializeApp(widget.box, quranAyahBox);
-    //widget.box.put("migration", "a");
+    InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
+
+    // widget.box.put("migration", "a");
     if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
-      init.PopulateQuranData();
+      init.PopulateQuranData(context);
     }
 
     HijriCalendar _hijriToday = new HijriCalendar.now();

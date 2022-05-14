@@ -70,9 +70,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:4193584269556766753",
+      "lastPropertyId": "7:2633017384070580102",
+      "name": "Surahs",
+      "properties": [
+        {
+          "id": "1:8577842436994331573",
+          "name": "id",
+          "type": 6,
+          "flags": 129
+        },
+        {
+          "id": "2:835934456095440465",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7945993237969536718",
+          "name": "ayah",
+          "type": 6
+        },
+        {
+          "id": "4:9095630420609565526",
+          "name": "revelationOrder",
+          "type": 6
+        },
+        {
+          "id": "5:5325076825970464319",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "6:3359417456112261306",
+          "name": "startAyah",
+          "type": 6
+        },
+        {
+          "id": "7:2633017384070580102",
+          "name": "endAyah",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:7214744480193890939",
+  "lastEntityId": "3:4193584269556766753",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

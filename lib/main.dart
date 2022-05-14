@@ -31,8 +31,6 @@ Future<void> main() async {
 
   var objectBox = await ObjectBox.create();
 
-  final userBox = objectBox.store.box<QuranAyah>();
-
   // Location Starts
   loc.Location location = new loc.Location();
   bool _serviceEnabled;

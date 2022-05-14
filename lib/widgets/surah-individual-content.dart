@@ -3,7 +3,6 @@ import 'package:almuslim/models/ayah-with-translation.dart';
 import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 
 import '../database/store.dart';
 import '../models/quran-entity.dart';
