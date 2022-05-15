@@ -18,13 +18,12 @@ class SurahIndividualWithAyahs extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = this.box.get('theme');
 
-    var userBox = this.objectBox.store.box<QuranAyah>();
+    var quranObjectBox = this.objectBox.store.box<QuranAyah>();
     final query =
-        (userBox.query(ob.QuranAyah_.surahNumber.equals(this.surahInfo.id))
+        (quranObjectBox.query(ob.QuranAyah_.surahNumber.equals(this.surahInfo.id))
               ..order(ob.QuranAyah_.id))
             .build();
     final results = query.find();
-    print(results.length);
 
     return ListView.builder(
         shrinkWrap: true,
@@ -75,6 +74,32 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                             fontSize: 16,
                             color: themeSet[theme]["textColor"],
                           ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: InkWell(
+                                child: Icon(Icons.task_alt_rounded),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: InkWell(
+                                child: Icon(Icons.favorite_border),
+                                onTap: () {
+                                  debugPrint("Tapped favorite");
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(

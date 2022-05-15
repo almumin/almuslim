@@ -53,7 +53,7 @@ class SurahList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      surah.english,
+                      surah.latin,
                       style: TextStyle(
                         fontSize: 15,
                         color: themeSet[theme]["textColor"],

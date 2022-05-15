@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7764714462544937502",
-      "lastPropertyId": "5:823086920123750362",
+      "lastPropertyId": "7:223215796289975394",
       "name": "QuranAyah",
       "properties": [
         {
@@ -33,6 +33,16 @@
           "id": "5:823086920123750362",
           "name": "englishText",
           "type": 9
+        },
+        {
+          "id": "6:1018373693025123464",
+          "name": "readAlready",
+          "type": 1
+        },
+        {
+          "id": "7:223215796289975394",
+          "name": "isFavorite",
+          "type": 1
         }
       ],
       "relations": []

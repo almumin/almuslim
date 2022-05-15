@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 7764714462544937502),
       name: 'QuranAyah',
-      lastPropertyId: const IdUid(5, 823086920123750362),
+      lastPropertyId: const IdUid(7, 223215796289975394),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -49,6 +49,16 @@ final _entities = <ModelEntity>[
             id: const IdUid(5, 823086920123750362),
             name: 'englishText',
             type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(6, 1018373693025123464),
+            name: 'readAlready',
+            type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(7, 223215796289975394),
+            name: 'isFavorite',
+            type: 1,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -199,12 +209,14 @@ ModelDefinition getObjectBoxModel() {
           final englishTextOffset = object.englishText == null
               ? null
               : fbb.writeString(object.englishText);
-          fbb.startTable(6);
+          fbb.startTable(8);
           fbb.addInt64(0, object.id ?? 0);
           fbb.addInt64(1, object.surahNumber);
           fbb.addInt64(2, object.ayahNumber);
           fbb.addOffset(3, textOffset);
           fbb.addOffset(4, englishTextOffset);
+          fbb.addBool(5, object.readAlready);
+          fbb.addBool(6, object.isFavorite);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
@@ -222,7 +234,11 @@ ModelDefinition getObjectBoxModel() {
             ..text = const fb.StringReader(asciiOptimization: true)
                 .vTableGetNullable(buffer, rootOffset, 10)
             ..englishText = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 12);
+                .vTableGetNullable(buffer, rootOffset, 12)
+            ..readAlready =
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 14)
+            ..isFavorite =
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 16);
 
           return object;
         }),
@@ -356,6 +372,14 @@ class QuranAyah_ {
   /// see [QuranAyah.englishText]
   static final englishText =
       QueryStringProperty<QuranAyah>(_entities[0].properties[4]);
+
+  /// see [QuranAyah.readAlready]
+  static final readAlready =
+      QueryBooleanProperty<QuranAyah>(_entities[0].properties[5]);
+
+  /// see [QuranAyah.isFavorite]
+  static final isFavorite =
+      QueryBooleanProperty<QuranAyah>(_entities[0].properties[6]);
 }
 
 /// [AppContext] entity fields to define ObjectBox queries.

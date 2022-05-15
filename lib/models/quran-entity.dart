@@ -8,6 +8,8 @@ class QuranAyah {
   int ayahNumber;
   String text;
   String englishText;
+  bool readAlready;
+  bool isFavorite;
 }
 
 @Entity()

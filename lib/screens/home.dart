@@ -1,11 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:almuslim/methods/populate-data.dart';
-import 'package:almuslim/models/quran-entity.dart';
-import 'package:almuslim/models/surahs.dart';
-import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
@@ -16,15 +11,11 @@ import 'package:almuslim/widgets/home-icon.dart';
 import 'package:flutter/material.dart';
 import 'package:hijri/hijri_calendar.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
-import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/widgets/daily-ayah.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart';
 
 import '../database/store.dart';
-import '../models/constants.dart';
-import '../models/app-context.dart';
 import '../modules/constants.dart';
 
 class HomeView extends StatefulWidget {
@@ -61,13 +52,10 @@ class _HomeViewState extends State<HomeView> {
         today = DateTime.now();
       });
     });
-
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     var ayah = widget.box.get('dailyAyah');
     print("Migration status: " + widget.box.get("migration"));
     InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
@@ -81,8 +69,6 @@ class _HomeViewState extends State<HomeView> {
     if (today == null) {
       today = DateTime.now();
     }
-
-    var dbProvider = Provider.of<DBProvider>(context);
     var theme = widget.box.get('theme');
     return Scaffold(
         appBar: AppBar(
@@ -269,6 +255,7 @@ class _HomeViewState extends State<HomeView> {
               icon: Icons.menu_book,
               widgets: DailyAyahByIndex(
                 index: ayah,
+                objectBox: widget.objectBox,
               )),
           HomeHeadingWidget(
             headingTitle: "Daily Hadith",
