@@ -20,10 +20,10 @@ class SurahIndividualWithAyahs extends StatelessWidget {
     var theme = this.box.get('theme');
 
     var quranObjectBox = this.objectBox.store.box<QuranAyah>();
-    final query =
-        (quranObjectBox.query(ob.QuranAyah_.surahNumber.equals(this.surahInfo.id))
-              ..order(ob.QuranAyah_.id))
-            .build();
+    final query = (quranObjectBox
+            .query(ob.QuranAyah_.surahNumber.equals(this.surahInfo.id))
+          ..order(ob.QuranAyah_.id))
+        .build();
     final results = query.find();
 
     return ListView.builder(
@@ -84,10 +84,18 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                         child: Row(
                           children: [
                             AyahOptions(
-                              icon: Icons.task_alt_rounded,
+                              icon: Icons.check_circle,
+                              selectionColor: Colors.green,
+                              isSelected: ayah.readAlready != null
+                                  ? ayah.isFavorite
+                                  : false,
                             ),
                             AyahOptions(
-                              icon: Icons.favorite_border,
+                              icon: Icons.favorite,
+                              selectionColor: Colors.red,
+                              isSelected: ayah.isFavorite != null
+                                  ? ayah.isFavorite
+                                  : false,
                             ),
                           ],
                         ),
@@ -107,4 +115,3 @@ class SurahIndividualWithAyahs extends StatelessWidget {
         });
   }
 }
-
