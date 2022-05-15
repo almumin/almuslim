@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AyahOptions extends StatefulWidget {
   final IconData icon;
-
   const AyahOptions({Key key, this.icon}) : super(key: key);
 
   @override
