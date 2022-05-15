@@ -5,6 +5,7 @@ import '../database/store.dart';
 import '../models/quran-entity.dart';
 import '../modules/constants.dart';
 import '../objectbox.g.dart' as ob;
+import 'ayah-options.dart';
 
 class SurahIndividualWithAyahs extends StatelessWidget {
   final Surahs surahInfo;
@@ -82,22 +83,11 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                       Container(
                         child: Row(
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: InkWell(
-                                child: Icon(Icons.task_alt_rounded),
-                              ),
+                            AyahOptions(
+                              icon: Icons.task_alt_rounded,
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 10, right: 10),
-                              child: InkWell(
-                                child: Icon(Icons.favorite_border),
-                                onTap: () {
-                                  debugPrint("Tapped favorite");
-                                },
-                              ),
+                            AyahOptions(
+                              icon: Icons.favorite_border,
                             ),
                           ],
                         ),
@@ -117,3 +107,4 @@ class SurahIndividualWithAyahs extends StatelessWidget {
         });
   }
 }
+
