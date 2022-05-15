@@ -2,20 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../database/store.dart';
 import '../models/constants.dart';
 import '../models/quran-entity.dart';
-import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:hive/hive.dart';
 
 class InitializeApp {
   final Box hiveStore;
   final ObjectBox objectBox;
 
-  InitializeApp(this.hiveStore, this.objectBox/*, this.quranObjectBoxStore, this.surahObjectBoxStore*/);
+  InitializeApp(this.hiveStore, this.objectBox);
 
   Future<String> loadFile(BuildContext context, String fileName) async {
     String jsonStringValues = await DefaultAssetBundle.of(context).loadString(fileName);
@@ -31,7 +28,6 @@ class InitializeApp {
     mappedJson.forEach((value) {
       if (count == 1) {
         this.hiveStore.put("migration", "ongoing");
-        surahObjectBox.removeAll();
         print("Started Surah migration");
       }
       if (count <= mappedJson.length) {
@@ -70,7 +66,6 @@ class InitializeApp {
                 .listen(
               (String line) {
                 if (count == 1) {
-                  quranAyahObjectBox.removeAll();
                   print("Started Quran basic migration");
                 }
                 if (count <= TotalAyah) {
@@ -95,6 +90,8 @@ class InitializeApp {
 
   void PopulateQuranEnglishTranslationData() async {
     var quranAyahObjectBox = objectBox.store.box<QuranAyah>();
+    print("quranAyahObjectBox");
+    print(quranAyahObjectBox);
     var count = 1;
     new HttpClient()
         .getUrl(

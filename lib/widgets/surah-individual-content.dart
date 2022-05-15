@@ -1,6 +1,3 @@
-import 'package:almuslim/data/quran.dart';
-import 'package:almuslim/models/ayah-with-translation.dart';
-import 'package:almuslim/models/surahs.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -10,7 +7,7 @@ import '../modules/constants.dart';
 import '../objectbox.g.dart' as ob;
 
 class SurahIndividualWithAyahs extends StatelessWidget {
-  final Surah surahInfo;
+  final Surahs surahInfo;
   final Box box;
   final ObjectBox objectBox;
 

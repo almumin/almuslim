@@ -1,14 +1,9 @@
-import 'package:almuslim/data/quran.dart';
 import 'package:almuslim/models/quran-entity.dart';
-import 'package:almuslim/models/surahs.dart';
-import 'package:almuslim/objectbox.g.dart' as ob;
 import 'package:almuslim/screens/surah-individual.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 import '../database/store.dart';
 import '../modules/constants.dart';
-import '../objectbox.g.dart' as ob;
 
 class SurahList extends StatelessWidget {
   final Box box;
@@ -18,7 +13,6 @@ class SurahList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var dbProvider = Provider.of<DBProvider>(context);
     var theme = this.box.get('theme');
 
     var surahBox = this.objectBox.store.box<Surahs>();
@@ -42,9 +36,9 @@ class SurahList extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SurahIndividual(
-                          // surah: results[index],
+                          surah: results[index],
                           box: this.box,
-                          objectBox: this.objectBox, surah: null,
+                          objectBox: this.objectBox,
                         )))
               },
               child: ListTile(

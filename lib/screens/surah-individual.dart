@@ -1,5 +1,4 @@
 import 'package:almuslim/data/quran.dart';
-import 'package:almuslim/models/surahs.dart';
 import 'package:almuslim/widgets/surah-individual-content.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -8,10 +7,9 @@ import 'package:provider/provider.dart';
 import '../database/store.dart';
 import '../models/quran-entity.dart';
 import '../modules/constants.dart';
-import '../objectbox.g.dart' as ob;
 
 class SurahIndividual extends StatefulWidget {
-  final Surah surah;
+  final Surahs surah;
   final Box box;
   final ObjectBox objectBox;
 
@@ -78,7 +76,7 @@ class _SurahIndividualState extends State<SurahIndividual> {
                           ),
                         ),
                         Text(
-                          "Ayah: ${widget.surah.numberOfAyah}",
+                          "Ayah: ${widget.surah.ayah}",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
