@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../database/store.dart';
 import '../models/quran-entity.dart';
@@ -45,12 +46,17 @@ class _DailyAyahByIndexState extends State<DailyAyahByIndex> {
           alignment: Alignment.centerRight,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "${results[0].arabicText}",
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.right,
-              softWrap: true,
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.w500),
+            child: Html(
+              data: "${results[0].arabicText}",
+              style: {
+                "body": Style(
+                  fontSize: FontSize(26),
+                  fontWeight: FontWeight.w500,
+                  alignment: Alignment.center,
+                  textAlign: TextAlign.right,
+                  direction: TextDirection.rtl,
+                ),
+              },
             ),
           ),
         ),
