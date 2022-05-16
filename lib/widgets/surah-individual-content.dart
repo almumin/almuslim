@@ -66,6 +66,7 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                           "body": Style(
                             fontSize: FontSize(16),
                             fontWeight: FontWeight.normal,
+                            fontStyle: FontStyle.italic,
                           ),
                         },
                       ),
