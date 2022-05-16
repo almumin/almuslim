@@ -19,7 +19,6 @@ class SurahIndividualWithAyahs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = this.box.get('theme');
-
     var quranObjectBox = this.objectBox.store.box<QuranAyah>();
     final query = (quranObjectBox
             .query(ob.QuranAyah_.surahNumber.equals(this.surahInfo.id))
@@ -46,19 +45,17 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                 child: Container(
                   child: Column(
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          "${ayah.arabicText}",
-                          textDirection: TextDirection.rtl,
-                          textAlign: TextAlign.right,
-                          softWrap: true,
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.w600,
-                            color: themeSet[theme]["textColor"],
+                      Html(
+                        data: "${ayah.arabicText}",
+                        style: {
+                          "body": Style(
+                            fontSize: FontSize(30),
+                            fontWeight: FontWeight.w500,
+                            alignment: Alignment.center,
+                            textAlign: TextAlign.right,
+                            direction: TextDirection.rtl,
                           ),
-                        ),
+                        },
                       ),
                       Html(
                         data: "${ayah.transliteration}",

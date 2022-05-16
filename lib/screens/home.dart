@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
     super.initState();
     print("Migration status: " + widget.box.get("migration"));
     InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
-    // widget.box.put("migration", "a");
+    // widget.box.put("migration", "a"); // Start a new migration
     if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
       init.PopulateQuranData(context);
     }
