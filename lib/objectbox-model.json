@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:7764714462544937502",
-      "lastPropertyId": "7:223215796289975394",
+      "lastPropertyId": "10:4646522082995358982",
       "name": "QuranAyah",
       "properties": [
         {
@@ -25,16 +25,6 @@
           "type": 6
         },
         {
-          "id": "4:1642707768174414378",
-          "name": "text",
-          "type": 9
-        },
-        {
-          "id": "5:823086920123750362",
-          "name": "englishText",
-          "type": 9
-        },
-        {
           "id": "6:1018373693025123464",
           "name": "readAlready",
           "type": 1
@@ -43,6 +33,21 @@
           "id": "7:223215796289975394",
           "name": "isFavorite",
           "type": 1
+        },
+        {
+          "id": "8:2958562652573877730",
+          "name": "arabicText",
+          "type": 9
+        },
+        {
+          "id": "9:7120833465310169257",
+          "name": "englishTranslation",
+          "type": 9
+        },
+        {
+          "id": "10:4646522082995358982",
+          "name": "transliteration",
+          "type": 9
         }
       ],
       "relations": []
@@ -152,7 +157,9 @@
   "retiredPropertyUids": [
     835934456095440465,
     3359417456112261306,
-    2633017384070580102
+    2633017384070580102,
+    1642707768174414378,
+    823086920123750362
   ],
   "retiredRelationUids": [],
   "version": 1

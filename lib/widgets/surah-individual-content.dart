@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:hive/hive.dart';
 
 import '../database/store.dart';
@@ -48,7 +49,7 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          "${ayah.text}",
+                          "${ayah.arabicText}",
                           textDirection: TextDirection.rtl,
                           textAlign: TextAlign.right,
                           softWrap: true,
@@ -59,17 +60,19 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                           ),
                         ),
                       ),
-                      /*Text(
-                            "${ayah.transliteration}",
-                            softWrap: true,
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),*/
+                      Html(
+                        data: "${ayah.transliteration}",
+                        style: {
+                          "body": Style(
+                            fontSize: FontSize(16),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        },
+                      ),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "${ayah.ayahNumber}. ${ayah.englishText}",
+                          "${ayah.ayahNumber}. ${ayah.englishTranslation}",
                           softWrap: true,
                           style: TextStyle(
                             fontSize: 16,

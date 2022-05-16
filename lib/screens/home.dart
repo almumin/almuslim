@@ -44,6 +44,12 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    print("Migration status: " + widget.box.get("migration"));
+    InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
+    // widget.box.put("migration", "a");
+    if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
+      init.PopulateQuranData(context);
+    }
     // sets first datetime value
     today = DateTime.now();
     // defines a timer
@@ -57,13 +63,8 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     var ayah = widget.box.get('dailyAyah');
-    print("Migration status: " + widget.box.get("migration"));
-    InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
 
-    // widget.box.put("migration", "a");
-    if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
-      init.PopulateQuranData(context);
-    }
+
 
     HijriCalendar _hijriToday = new HijriCalendar.now();
     if (today == null) {

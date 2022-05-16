@@ -27,8 +27,8 @@ class _QuranSecondaryState extends State<QuranSecondary> {
         itemBuilder: (_, int index) {
           return Column(
             children: [
-              Text(results[index].text),
-              Text(results[index].englishText),
+              Text(results[index].arabicText),
+              Text(results[index].englishTranslation),
             ],
           );
         });

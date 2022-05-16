@@ -6,8 +6,9 @@ class QuranAyah {
   int id;
   int surahNumber;
   int ayahNumber;
-  String text;
-  String englishText;
+  String arabicText;
+  String englishTranslation;
+  String transliteration;
   bool readAlready;
   bool isFavorite;
 }

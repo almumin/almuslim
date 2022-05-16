@@ -22,7 +22,7 @@ final _entities = <ModelEntity>[
   ModelEntity(
       id: const IdUid(1, 7764714462544937502),
       name: 'QuranAyah',
-      lastPropertyId: const IdUid(7, 223215796289975394),
+      lastPropertyId: const IdUid(10, 4646522082995358982),
       flags: 0,
       properties: <ModelProperty>[
         ModelProperty(
@@ -41,16 +41,6 @@ final _entities = <ModelEntity>[
             type: 6,
             flags: 0),
         ModelProperty(
-            id: const IdUid(4, 1642707768174414378),
-            name: 'text',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(5, 823086920123750362),
-            name: 'englishText',
-            type: 9,
-            flags: 0),
-        ModelProperty(
             id: const IdUid(6, 1018373693025123464),
             name: 'readAlready',
             type: 1,
@@ -59,6 +49,21 @@ final _entities = <ModelEntity>[
             id: const IdUid(7, 223215796289975394),
             name: 'isFavorite',
             type: 1,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(8, 2958562652573877730),
+            name: 'arabicText',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(9, 7120833465310169257),
+            name: 'englishTranslation',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(10, 4646522082995358982),
+            name: 'transliteration',
+            type: 9,
             flags: 0)
       ],
       relations: <ModelRelation>[],
@@ -187,7 +192,9 @@ ModelDefinition getObjectBoxModel() {
       retiredPropertyUids: const [
         835934456095440465,
         3359417456112261306,
-        2633017384070580102
+        2633017384070580102,
+        1642707768174414378,
+        823086920123750362
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -204,19 +211,24 @@ ModelDefinition getObjectBoxModel() {
           object.id = id;
         },
         objectToFB: (QuranAyah object, fb.Builder fbb) {
-          final textOffset =
-              object.text == null ? null : fbb.writeString(object.text);
-          final englishTextOffset = object.englishText == null
+          final arabicTextOffset = object.arabicText == null
               ? null
-              : fbb.writeString(object.englishText);
-          fbb.startTable(8);
+              : fbb.writeString(object.arabicText);
+          final englishTranslationOffset = object.englishTranslation == null
+              ? null
+              : fbb.writeString(object.englishTranslation);
+          final transliterationOffset = object.transliteration == null
+              ? null
+              : fbb.writeString(object.transliteration);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id ?? 0);
           fbb.addInt64(1, object.surahNumber);
           fbb.addInt64(2, object.ayahNumber);
-          fbb.addOffset(3, textOffset);
-          fbb.addOffset(4, englishTextOffset);
           fbb.addBool(5, object.readAlready);
           fbb.addBool(6, object.isFavorite);
+          fbb.addOffset(7, arabicTextOffset);
+          fbb.addOffset(8, englishTranslationOffset);
+          fbb.addOffset(9, transliterationOffset);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
@@ -231,14 +243,17 @@ ModelDefinition getObjectBoxModel() {
                 const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 6)
             ..ayahNumber =
                 const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 8)
-            ..text = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 10)
-            ..englishText = const fb.StringReader(asciiOptimization: true)
-                .vTableGetNullable(buffer, rootOffset, 12)
             ..readAlready =
                 const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 14)
             ..isFavorite =
-                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 16);
+                const fb.BoolReader().vTableGetNullable(buffer, rootOffset, 16)
+            ..arabicText = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 18)
+            ..englishTranslation =
+                const fb.StringReader(asciiOptimization: true)
+                    .vTableGetNullable(buffer, rootOffset, 20)
+            ..transliteration = const fb.StringReader(asciiOptimization: true)
+                .vTableGetNullable(buffer, rootOffset, 22);
 
           return object;
         }),
@@ -365,21 +380,25 @@ class QuranAyah_ {
   static final ayahNumber =
       QueryIntegerProperty<QuranAyah>(_entities[0].properties[2]);
 
-  /// see [QuranAyah.text]
-  static final text =
-      QueryStringProperty<QuranAyah>(_entities[0].properties[3]);
-
-  /// see [QuranAyah.englishText]
-  static final englishText =
-      QueryStringProperty<QuranAyah>(_entities[0].properties[4]);
-
   /// see [QuranAyah.readAlready]
   static final readAlready =
-      QueryBooleanProperty<QuranAyah>(_entities[0].properties[5]);
+      QueryBooleanProperty<QuranAyah>(_entities[0].properties[3]);
 
   /// see [QuranAyah.isFavorite]
   static final isFavorite =
-      QueryBooleanProperty<QuranAyah>(_entities[0].properties[6]);
+      QueryBooleanProperty<QuranAyah>(_entities[0].properties[4]);
+
+  /// see [QuranAyah.arabicText]
+  static final arabicText =
+      QueryStringProperty<QuranAyah>(_entities[0].properties[5]);
+
+  /// see [QuranAyah.englishTranslation]
+  static final englishTranslation =
+      QueryStringProperty<QuranAyah>(_entities[0].properties[6]);
+
+  /// see [QuranAyah.transliteration]
+  static final transliteration =
+      QueryStringProperty<QuranAyah>(_entities[0].properties[7]);
 }
 
 /// [AppContext] entity fields to define ObjectBox queries.

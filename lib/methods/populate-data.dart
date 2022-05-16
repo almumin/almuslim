@@ -15,13 +15,15 @@ class InitializeApp {
   InitializeApp(this.hiveStore, this.objectBox);
 
   Future<String> loadFile(BuildContext context, String fileName) async {
-    String jsonStringValues = await DefaultAssetBundle.of(context).loadString(fileName);
+    String jsonStringValues =
+        await DefaultAssetBundle.of(context).loadString(fileName);
     return jsonStringValues;
   }
 
-  void PopulateQuranData(BuildContext context) async{
+  void PopulateQuranData(BuildContext context) async {
     var surahObjectBox = objectBox.store.box<Surahs>();
-    String jsonStringValues = await loadFile(context, "assets/data/surahs.json");
+    String jsonStringValues =
+        await loadFile(context, "assets/data/surahs.json");
     List<dynamic> mappedJson = jsonDecode(jsonStringValues);
 
     var count = 1;
@@ -74,7 +76,7 @@ class InitializeApp {
                   quran.id = count;
                   quran.surahNumber = int.parse(quranLine[0]);
                   quran.ayahNumber = int.parse(quranLine[1]);
-                  quran.text = quranLine[2];
+                  quran.arabicText = quranLine[2];
                   quranAyahObjectBox.put(quran);
                   count++;
                 }
@@ -84,14 +86,57 @@ class InitializeApp {
               },
             ).onDone(() {
               print("Quran basic Migration done");
-              this.PopulateQuranEnglishTranslationData();
+              this.PopulateQuranEnglishTranslationData(
+                  "English Translation",
+                  "https://tanzil.net/trans/?transID=en.ahmedali&type=txt",
+                  "translation", () {
+                this.PopulateQuranEnglishTranslationData(
+                    "Transliteration",
+                    "https://tanzil.net/trans/?transID=en.transliteration&type=txt",
+                    "transliteration", () {
+                  this.hiveStore.put("migration", "done");
+                });
+              });
             }));
   }
 
-  void PopulateQuranEnglishTranslationData() async {
+  void PopulateQuranEnglishTranslationData(
+      String title, url, column, Function callback) async {
     var quranAyahObjectBox = objectBox.store.box<QuranAyah>();
-    print("quranAyahObjectBox");
-    print(quranAyahObjectBox);
+    var count = 1;
+    new HttpClient()
+        .getUrl(Uri.parse(url))
+        .then((HttpClientRequest request) => request.close())
+        .then((HttpClientResponse response) => response
+                .transform(new Utf8Decoder())
+                .transform(new LineSplitter())
+                .listen(
+              (String line) {
+                if (count == 1) {
+                  print("Started ${title} migration");
+                }
+                if (count <= TotalAyah) {
+                  QuranAyah quranAyah = quranAyahObjectBox.get(count);
+                  if (column == "transliteration") {
+                    quranAyah.transliteration = line;
+                  } else if (column == "translation") {
+                    quranAyah.englishTranslation = line;
+                  }
+                  quranAyahObjectBox.put(quranAyah);
+                  count++;
+                }
+                if (count == TotalAyah) {
+                  print("Ended ${title} migration. With ${count} lines");
+                }
+              },
+            ).onDone(() {
+              print("Migration for ${title} done");
+              callback();
+            }));
+  }
+
+  /*void PopulateQuranEnglishTranslationData() async {
+    var quranAyahObjectBox = objectBox.store.box<QuranAyah>();
     var count = 1;
     new HttpClient()
         .getUrl(
@@ -107,7 +152,7 @@ class InitializeApp {
                 }
                 if (count <= TotalAyah) {
                   QuranAyah quranAyah = quranAyahObjectBox.get(count);
-                  quranAyah.englishText = line;
+                  quranAyah.englishTranslation = line;
                   quranAyahObjectBox.put(quranAyah);
                   count++;
                 }
@@ -119,5 +164,5 @@ class InitializeApp {
               print("Migration for translation done");
               this.hiveStore.put("migration", "done");
             }));
-  }
+  }*/
 }

@@ -46,7 +46,7 @@ class _DailyAyahByIndexState extends State<DailyAyahByIndex> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "${results[0].text}",
+              "${results[0].arabicText}",
               textDirection: TextDirection.rtl,
               textAlign: TextAlign.right,
               softWrap: true,
@@ -59,7 +59,7 @@ class _DailyAyahByIndexState extends State<DailyAyahByIndex> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "${results[0].englishText}",
+              "${results[0].englishTranslation}",
               softWrap: true,
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
             ),
