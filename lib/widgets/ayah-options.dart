@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../database/store.dart';
+import '../models/quran-entity.dart';
+import '../objectbox.g.dart';
+
 class AyahOptions extends StatefulWidget {
   final IconData icon;
   final bool isSelected;
   final Color selectionColor;
-  const AyahOptions({Key key, this.icon, this.isSelected, this.selectionColor}) : super(key: key);
+  final ObjectBox objectBox;
+  final String optionType;
+  final int id;
+  const AyahOptions({Key key, this.icon, this.isSelected, this.selectionColor, this.objectBox, this.optionType, this.id}) : super(key: key);
 
   @override
   State<AyahOptions> createState() => _AyahOptionsState();
@@ -12,11 +19,15 @@ class AyahOptions extends StatefulWidget {
 
 class _AyahOptionsState extends State<AyahOptions> {
   var selected;
+  Box quranObjectBox;
+  QuranAyah currentAyah;
 
   @override
   void initState() {
     super.initState();
     selected = widget.isSelected;
+    quranObjectBox = widget.objectBox.store.box<QuranAyah>();
+    currentAyah = quranObjectBox.get(widget.id);
   }
 
   @override
@@ -31,6 +42,17 @@ class _AyahOptionsState extends State<AyahOptions> {
         onTap: () {
           setState(() {
             this.selected = !this.selected;
+            if (widget.optionType != null){
+              switch (widget.optionType) {
+                case "favorite":
+                  currentAyah.isFavorite = this.selected;
+                  break;
+                case "readAlready":
+                  currentAyah.readAlready = this.selected;
+                  break;
+              }
+              quranObjectBox.put(currentAyah);
+            }
             print("selected " + this.selected.toString());
           });
         },

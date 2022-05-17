@@ -1,11 +1,13 @@
-import 'package:almuslim/database/store.dart';
+import 'package:almuslim/database/store.dart' as ob;
 import 'package:almuslim/objectbox.g.dart';
 import 'package:flutter/material.dart';
 
 import '../models/quran-entity.dart';
+import '../modules/constants.dart';
+import '../screens/surah-individual.dart';
 
 class QuranSecondary extends StatefulWidget {
-  final ObjectBox objectBox;
+  final ob.ObjectBox objectBox;
 
   const QuranSecondary({Key key, this.objectBox}) : super(key: key);
 
@@ -14,23 +16,62 @@ class QuranSecondary extends StatefulWidget {
 }
 
 class _QuranSecondaryState extends State<QuranSecondary> {
+  List<QuranAyah> results;
+  List<Surahs> surahs;
   @override
-  Widget build(BuildContext context) {
-    var userBox = widget.objectBox.store.box<QuranAyah>();
-    final query = (userBox.query(QuranAyah_.id.between(8, 300))
+  void initState() {
+    Box quranObjectBox = widget.objectBox.store.box<QuranAyah>();
+    Box surahObjectBox = widget.objectBox.store.box<Surahs>();
+    final query = (quranObjectBox.query(QuranAyah_.isFavorite.equals(true))
           ..order(QuranAyah_.id))
         .build();
-    final results = query.find();
-    print(results.length);
+
+    results = query.find();
+    surahs = surahObjectBox.getAll();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // var theme = this.box.get('theme');
+
     return ListView.builder(
+        addAutomaticKeepAlives: true,
         itemCount: results.length,
         itemBuilder: (_, int index) {
-          return Column(
-            children: [
-              Text(results[index].arabicText),
-              Text(results[index].englishTranslation),
-            ],
-          );
+          var surahNumber = results[index].surahNumber - 1;
+          return Container(
+              // color: themeSet[theme]["backgroundColor"],
+              child: InkWell(
+            onTap: () => {},
+            child: ListTile(
+              leading: Text(
+                "${surahs[surahNumber].id}.",
+                style: TextStyle(
+                  color: /*themeSet[theme]["textColor"]*/ Colors.green,
+                ),
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    surahs[surahNumber].latin,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: /*themeSet[theme]["textColor"]*/ Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "${surahs[surahNumber].id}:${results[index].ayahNumber.toString()}",
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: /*themeSet[theme]["textColor"])*/ Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ));
         });
   }
 }

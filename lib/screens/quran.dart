@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 
-import '../database/store.dart';
+import '../database/store.dart' as ob;
 import '../modules/constants.dart';
 
 class QuranHome extends StatefulWidget {
   final Box box;
-  final ObjectBox objectBox;
+  final ob.ObjectBox objectBox;
 
   const QuranHome({Key key, this.box, this.objectBox}) : super(key: key);
 
@@ -49,7 +49,7 @@ class _QuranHomeState extends State<QuranHome>
               icon: new Icon(Icons.menu_book_outlined),
             ),
             new Tab(
-              icon: new Icon(Icons.remove_red_eye_outlined),
+              icon: new Icon(Icons.favorite),
             ),
           ]),
         ),
@@ -59,7 +59,7 @@ class _QuranHomeState extends State<QuranHome>
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
               SurahList(box: widget.box, objectBox: widget.objectBox,),
-              QuranSecondary(objectBox: widget.objectBox,),
+              QuranSecondary(objectBox: widget.objectBox),
             ]),
       ),
     );

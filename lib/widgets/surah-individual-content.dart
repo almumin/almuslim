@@ -87,13 +87,19 @@ class SurahIndividualWithAyahs extends StatelessWidget {
                             AyahOptions(
                               icon: Icons.check_circle,
                               selectionColor: Colors.green,
+                              objectBox: this.objectBox,
+                              id: ayah.id,
+                              optionType: "readAlready",
                               isSelected: ayah.readAlready != null
-                                  ? ayah.isFavorite
+                                  ? ayah.readAlready
                                   : false,
                             ),
                             AyahOptions(
                               icon: Icons.favorite,
                               selectionColor: Colors.red,
+                              objectBox: this.objectBox,
+                              id: ayah.id,
+                              optionType: "favorite",
                               isSelected: ayah.isFavorite != null
                                   ? ayah.isFavorite
                                   : false,
