@@ -10,6 +10,10 @@ Upcoming features
     - Duas
     - And many more
 
+References:
+
+    Sahih Bukhari JSON: https://raw.githubusercontent.com/essaji/Complete-Sahih-Bukhari-Json/master/sahih_bukhari.json
+    Duas JSON file: https://github.com/puntoria/prayertimes-api/blob/master/run_results.json
 
 ### Copyright of the images
 
