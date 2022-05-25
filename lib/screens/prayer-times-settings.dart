@@ -27,26 +27,43 @@ class _PrayerTimesSettingsState extends State<PrayerTimesSettings> {
         title: Text("Prayer times settings"),
         backgroundColor: baseGreenColor,
       ),
-      body: Container(child: Column(
+      body: Container(
+          child: Column(
         children: [
           CalculationMethodsWidget(box: widget.box),
-
           SettingsTitle(
             icon: Icons.language,
             headingText: "Madhab",
             hasBorder: true,
             onTap: () => showDialog(
               context: context,
-              builder: (BuildContext context) =>
-                  AlertRadioButtonWithData(
-                    title: "Set Madhab",
-                    data: {
-                      Madhab.shafi.toString(): "Shafi",
-                      Madhab.hanafi.toString(): "Hanafi",
-                    },
-                    box: widget.box,
-                    dataKey: "madhab",
-                  ),
+              builder: (BuildContext context) => AlertRadioButtonWithData(
+                title: "Set Madhab",
+                data: {
+                  Madhab.shafi.toString(): "Shafi",
+                  Madhab.hanafi.toString(): "Hanafi",
+                },
+                box: widget.box,
+                dataKey: "madhab",
+              ),
+            ),
+          ),
+          SettingsTitle(
+            icon: Icons.panorama_wide_angle_outlined,
+            headingText: "Angle",
+            hasBorder: true,
+            onTap: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => AlertRadioButtonWithData(
+                title: "Set Angle",
+                data: {
+                  HighLatitudeRule.twilight_angle.name: "Angle based",
+                  HighLatitudeRule.middle_of_the_night.name: "Middle of the night",
+                  HighLatitudeRule.seventh_of_the_night.name: "1/7 of the night",
+                },
+                box: widget.box,
+                dataKey: "highLatitudeRule",
+              ),
             ),
           )
         ],

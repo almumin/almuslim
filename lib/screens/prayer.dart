@@ -26,10 +26,16 @@ class Prayer extends StatelessWidget {
     }
     var madhab = box.get('madhab');
     print(madhab);
+    if (box.get('highLatitudeRule') == null) {
+      box.put('highLatitudeRule', defaulthighLatitudeRule);
+    }
+    var highLatitudeRule = box.get('highLatitudeRule');
+    print(highLatitudeRule);
     PrayerTimes pTimes = getPrayerTimes(
         Coordinates(locationData.latitude, locationData.longitude),
         method,
-        madhab);
+        madhab,
+        highLatitudeRule);
     print(pTimes);
     print(pTimes);
     var theme = this.box.get('theme');
@@ -88,9 +94,11 @@ class Prayer extends StatelessWidget {
 }
 
 PrayerTimes getPrayerTimes(
-    Coordinates myCoordinates, String calculationMethod, String madhab) {
+    Coordinates myCoordinates, String calculationMethod, String madhab, String highLatitudeRule) {
   CalculationParameters params =
       CalculationMethod.values.byName(calculationMethod).getParameters();
+  // add angle based method
+  params.highLatitudeRule = HighLatitudeRule.values.byName(highLatitudeRule);
 
   if (madhab == Madhab.shafi.toString()) {
     params.madhab = Madhab.shafi;
