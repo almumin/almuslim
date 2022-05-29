@@ -10,15 +10,29 @@ import 'dart:math';
 import 'package:almuslim/models/constants.dart';
 import 'package:location/location.dart' as loc;
 import 'package:geocoding/geocoding.dart';
+import 'package:workmanager/workmanager.dart';
 import 'database/store.dart';
 import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
 import 'objectbox.g.dart';
 
-void callbackDispatcher() {}
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    print("Native called background task: $task"); //simpleTask will be emitted here.
+    return Future.value(true);
+  });
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  Workmanager().initialize(
+      callbackDispatcher, // The top level function, aka callbackDispatcher
+      isInDebugMode: true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+  );
+  Workmanager().registerOneOffTask("task-identifier", "simpleTask");
+
+
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
