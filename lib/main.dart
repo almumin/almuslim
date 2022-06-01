@@ -16,22 +16,46 @@ import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
 import 'objectbox.g.dart';
 
+const hourlyScheduledTask = "hourlyScheduledTask";
+const weeklyScheduledTask = "weeklyScheduledTask";
+const monthlyScheduledTask = "monthlyScheduledTask";
+
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    print("Native called background task: $task"); //simpleTask will be emitted here.
+    switch (task) {
+      case hourlyScheduledTask:
+        print("$hourlyScheduledTask was executed. inputData = $inputData");
+        break;
+      case weeklyScheduledTask:
+        print("$weeklyScheduledTask was executed. inputData = $inputData");
+        break;
+      case monthlyScheduledTask:
+        print("$monthlyScheduledTask was executed. inputData = $inputData");
+        return Future.value(true);
+      case Workmanager.iOSBackgroundTask:
+        print("The iOS background fetch was triggered");
+        break;
+    }
     return Future.value(true);
   });
 }
 
 Future<void> main() async {
+  print(DateTime.now());
   WidgetsFlutterBinding.ensureInitialized();
+
 
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
-      isInDebugMode: true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      isInDebugMode:
+          false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      );
+  Workmanager().cancelAll();
+  Workmanager().registerPeriodicTask(
+    hourlyScheduledTask,
+    hourlyScheduledTask,
+    frequency: Duration(minutes: 15),
   );
-  Workmanager().registerOneOffTask("task-identifier", "simpleTask");
-
 
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
