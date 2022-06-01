@@ -89,7 +89,7 @@ Future<void> main() async {
       _locationData.latitude, _locationData.longitude);
   // GEOLocation Ends
 
-  // Work manager Initialization
+  // Work manager Initialization starts here
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
       isInDebugMode:
