@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:adhan/adhan.dart';
 import 'package:almuslim/models/app-context.dart';
+import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
+import 'package:almuslim/screens/prayer.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
@@ -24,8 +27,19 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
     switch (task) {
       case hourlyScheduledTask:
+        print("pTimes.nextPrayer()");
         print("$hourlyScheduledTask was executed. inputData = $inputData");
-        print(DateTime.now());
+
+        PrayerTimes pTimes = getPrayerTimes(
+            Coordinates(inputData["latitude"], inputData["longitude"]),
+            inputData["calculationMethod"],
+            inputData["madhab"],
+            inputData["highLatitudeRule"]);
+
+        print(pTimes.nextPrayer());
+        print(pTimes.timeForPrayer(pTimes.nextPrayer()));
+        print(pTimes.timeForPrayer(pTimes.nextPrayer()).difference(DateTime.now()));
+
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
@@ -44,8 +58,6 @@ void callbackDispatcher() {
 Future<void> main() async {
   print(DateTime.now());
   WidgetsFlutterBinding.ensureInitialized();
-
-
 
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
@@ -93,14 +105,21 @@ Future<void> main() async {
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
       isInDebugMode:
-      false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-  );
+          false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      );
   Workmanager().cancelAll();
   Workmanager().registerPeriodicTask(
     hourlyScheduledTask,
     hourlyScheduledTask,
+    initialDelay: Duration(seconds: 10),
     frequency: Duration(minutes: 15),
-    inputData: {'name': 'Tom', 'age': '23'},
+    inputData: {
+      'latitude': _locationData.latitude,
+      'longitude': _locationData.longitude,
+      'madhab': box.get('madhab') != null ? box.get('madhab') : defaultMadhab,
+      'highLatitudeRule': box.get('highLatitudeRule') != null ? box.get('highLatitudeRule') : defaulthighLatitudeRule,
+      'calculationMethod': box.get('calculationMethod') != null ? box.get('calculationMethod') : defaultCalculationMethod,
+    },
   );
 
   runApp(StreamBuilder<Object>(
