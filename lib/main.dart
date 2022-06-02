@@ -18,6 +18,7 @@ import 'database/store.dart';
 import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
 import 'objectbox.g.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 const hourlyScheduledTask = "hourlyScheduledTask";
 const weeklyScheduledTask = "weeklyScheduledTask";
@@ -38,8 +39,12 @@ void callbackDispatcher() {
 
         print(pTimes.nextPrayer());
         print(pTimes.timeForPrayer(pTimes.nextPrayer()));
-        print(pTimes.timeForPrayer(pTimes.nextPrayer()).difference(DateTime.now()));
-
+        var timeToNextPrayer = pTimes.timeForPrayer(pTimes.nextPrayer()).difference(DateTime.now());
+        print(timeToNextPrayer);
+        print(timeToNextPrayer.inSeconds);
+        tz.initializeTimeZones();
+        NotificationService().cancelAllNotifications();
+        NotificationService().showNotification(1, "📿 Al Muslim", "  Prayer time for  " + pTimes.nextPrayer().name.toUpperCase(), timeToNextPrayer.inSeconds);
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
