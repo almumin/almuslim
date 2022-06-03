@@ -20,7 +20,7 @@ import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
 import 'objectbox.g.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
+import 'package:intl/intl.dart' show DateFormat, toBeginningOfSentenceCase;
 
 const hourlyScheduledTask = "hourlyScheduledTask";
 const weeklyScheduledTask = "weeklyScheduledTask";
@@ -40,13 +40,19 @@ void callbackDispatcher() {
             inputData["highLatitudeRule"]);
 
         print(pTimes.nextPrayer());
-        print(pTimes.timeForPrayer(pTimes.nextPrayer()));
-        var timeToNextPrayer = pTimes.timeForPrayer(pTimes.nextPrayer()).difference(DateTime.now());
+        var nextPrayerTime = pTimes.timeForPrayer(pTimes.nextPrayer());
+        var timeToNextPrayer = nextPrayerTime.difference(DateTime.now());
         print(timeToNextPrayer);
         print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
         NotificationService().cancelAllNotifications();
-        NotificationService().showNotification(1, "📿 Al Muslim", " Prayer time for " + toBeginningOfSentenceCase(pTimes.nextPrayer().name), timeToNextPrayer.inSeconds);
+        NotificationService().showNotification(
+            1,
+            toBeginningOfSentenceCase(pTimes.nextPrayer().name) +
+                " at " +
+                DateFormat('HH:mm').format(nextPrayerTime),
+            "📿 see prayer times",
+            20);
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
@@ -124,8 +130,12 @@ Future<void> main() async {
       'latitude': _locationData.latitude,
       'longitude': _locationData.longitude,
       'madhab': box.get('madhab') != null ? box.get('madhab') : defaultMadhab,
-      'highLatitudeRule': box.get('highLatitudeRule') != null ? box.get('highLatitudeRule') : defaulthighLatitudeRule,
-      'calculationMethod': box.get('calculationMethod') != null ? box.get('calculationMethod') : defaultCalculationMethod,
+      'highLatitudeRule': box.get('highLatitudeRule') != null
+          ? box.get('highLatitudeRule')
+          : defaulthighLatitudeRule,
+      'calculationMethod': box.get('calculationMethod') != null
+          ? box.get('calculationMethod')
+          : defaultCalculationMethod,
     },
   );
 
@@ -145,5 +155,3 @@ Future<void> main() async {
         );
       }));
 }
-
-
