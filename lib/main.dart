@@ -20,6 +20,7 @@ import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
 import 'objectbox.g.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:intl/intl.dart' show toBeginningOfSentenceCase;
 
 const hourlyScheduledTask = "hourlyScheduledTask";
 const weeklyScheduledTask = "weeklyScheduledTask";
@@ -45,7 +46,7 @@ void callbackDispatcher() {
         print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
         NotificationService().cancelAllNotifications();
-        NotificationService().showNotification(1, "📿 Al Muslim", "  Prayer time for " + pTimes.nextPrayer().name.toCapitalized(), timeToNextPrayer.inSeconds);
+        NotificationService().showNotification(1, "📿 Al Muslim", " Prayer time for " + toBeginningOfSentenceCase(pTimes.nextPrayer().name), timeToNextPrayer.inSeconds);
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
