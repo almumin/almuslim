@@ -52,7 +52,7 @@ void callbackDispatcher() {
                 " at " +
                 DateFormat('HH:mm').format(nextPrayerTime),
             "📿 see prayer times",
-            20);
+            timeToNextPrayer.inSeconds);
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
