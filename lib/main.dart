@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:adhan/adhan.dart';
+import 'package:almuslim/extensions/string.dart';
 import 'package:almuslim/models/app-context.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
@@ -44,7 +45,7 @@ void callbackDispatcher() {
         print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
         NotificationService().cancelAllNotifications();
-        NotificationService().showNotification(1, "📿 Al Muslim", "  Prayer time for  " + pTimes.nextPrayer().name.toUpperCase(), timeToNextPrayer.inSeconds);
+        NotificationService().showNotification(1, "📿 Al Muslim", "  Prayer time for " + pTimes.nextPrayer().name.toCapitalized(), timeToNextPrayer.inSeconds);
         break;
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
@@ -143,3 +144,5 @@ Future<void> main() async {
         );
       }));
 }
+
+
