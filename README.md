@@ -10,8 +10,10 @@ Upcoming features
     - Duas
     - And many more
 
-References:
-        
+### Packages used:
+- 
+
+### References:        
 - Sahih Bukhari JSON: <a href="https://raw.githubusercontent.com/essaji/Complete-Sahih-Bukhari-Json/master/sahih_bukhari.json" title="sahih bukhari">https://github.com/essaji/Complete-Sahih-Bukhari-Json</a>
 - Duas JSON file: <a href="https://github.com/puntoria/prayertimes-api/blob/master/run_results.json" title="prayertimes api">https://github.com/puntoria/prayertimes-api</a> 
 
