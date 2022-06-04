@@ -10,8 +10,14 @@ Upcoming features
     - Duas
     - And many more
 
-### Packages used:
-- 
+### Flutter packages used:
+- adhan (https://pub.dev/packages/adhan)
+- hijri (https://pub.dev/packages/hijri)
+- objectbox (https://pub.dev/packages/objectbox)
+- flutter_local_notifications (https://pub.dev/packages/flutter_local_notifications)
+- workmanager (https://pub.dev/packages/workmanager)
+- flutter_html (https://pub.dev/packages/flutter_html)
+- hive (https://pub.dev/packages/hive)
 
 ### References:        
 - Sahih Bukhari JSON: <a href="https://raw.githubusercontent.com/essaji/Complete-Sahih-Bukhari-Json/master/sahih_bukhari.json" title="sahih bukhari">https://github.com/essaji/Complete-Sahih-Bukhari-Json</a>
