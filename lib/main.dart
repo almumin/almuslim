@@ -5,6 +5,7 @@ import 'package:almuslim/models/app-context.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
 import 'package:almuslim/screens/prayer.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
@@ -46,7 +47,7 @@ void callbackDispatcher() {
         print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
         NotificationService().cancelAllNotifications();
-        NotificationService().showNotification(
+        NotificationService().showScheduledNotification(
             1,
             toBeginningOfSentenceCase(pTimes.nextPrayer().name) +
                 " at " +

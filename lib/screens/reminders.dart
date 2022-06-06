@@ -43,7 +43,7 @@ class _RemindersState extends State<Reminders> {
             ),
             GestureDetector(
               onTap: () {
-                NotificationService().showNotification(1, "📿 Al Muslim", "  Prayer time for Isha", 3);
+                NotificationService().showScheduledNotification(1, "📿 Al Muslim", "  Prayer time for Isha", 3);
               },
               child: Container(
                 height: 40,
