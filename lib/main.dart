@@ -46,7 +46,7 @@ void callbackDispatcher() {
         print(timeToNextPrayer);
         print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
-        NotificationService().cancelAllNotifications();
+        // NotificationService().cancelAllNotifications();
         NotificationService().showScheduledNotification(
             1,
             toBeginningOfSentenceCase(pTimes.nextPrayer().name) +
