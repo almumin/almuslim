@@ -28,7 +28,7 @@ const weeklyScheduledTask = "weeklyScheduledTask";
 const monthlyScheduledTask = "monthlyScheduledTask";
 
 void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
+  Workmanager().executeTask((task, inputData) async {
     switch (task) {
       case hourlyScheduledTask:
         print("pTimes.nextPrayer()");
@@ -40,13 +40,9 @@ void callbackDispatcher() {
             inputData["madhab"],
             inputData["highLatitudeRule"]);
 
-        print(pTimes.nextPrayer());
         var nextPrayerTime = pTimes.timeForPrayer(pTimes.nextPrayer());
         var timeToNextPrayer = nextPrayerTime.difference(DateTime.now());
-        print(timeToNextPrayer);
-        print(timeToNextPrayer.inSeconds);
         tz.initializeTimeZones();
-        // NotificationService().cancelAllNotifications();
         NotificationService().showScheduledNotification(
             1,
             toBeginningOfSentenceCase(pTimes.nextPrayer().name) +

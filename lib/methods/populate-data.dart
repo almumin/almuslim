@@ -49,7 +49,7 @@ class InitializeApp {
         count++;
       }
       if (count == mappedJson.length) {
-        print("Ended Surah data migration. With ${count} Surahs");
+        print("Ended Surah data migration. With $count Surahs");
         this.PopulateQuranAyahData();
       }
     });
@@ -81,7 +81,7 @@ class InitializeApp {
                   count++;
                 }
                 if (count == TotalAyah) {
-                  print("Ended Quran basic migration. With ${count} lines");
+                  print("Ended Quran basic migration. With $count lines");
                 }
               },
             ).onDone(() {
@@ -113,7 +113,7 @@ class InitializeApp {
                 .listen(
               (String line) {
                 if (count == 1) {
-                  print("Started ${title} migration");
+                  print("Started $title migration");
                 }
                 if (count <= TotalAyah) {
                   QuranAyah quranAyah = quranAyahObjectBox.get(count);
@@ -126,11 +126,11 @@ class InitializeApp {
                   count++;
                 }
                 if (count == TotalAyah) {
-                  print("Ended ${title} migration. With ${count} lines");
+                  print("Ended $title migration. With $count lines");
                 }
               },
             ).onDone(() {
-              print("Migration for ${title} done");
+              print("Migration for $title done");
               callback();
             }));
   }
