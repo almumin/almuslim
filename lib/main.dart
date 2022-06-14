@@ -28,7 +28,7 @@ const weeklyScheduledTask = "weeklyScheduledTask";
 const monthlyScheduledTask = "monthlyScheduledTask";
 
 void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) async {
+  Workmanager().executeTask((task, inputData) {
     switch (task) {
       case hourlyScheduledTask:
         print("pTimes.nextPrayer()");
@@ -72,6 +72,7 @@ Future<void> main() async {
   NotificationService().initNotification();
   Directory directory = await pathProvider.getApplicationDocumentsDirectory();
   Hive.init(directory.path);
+
   Random random = new Random();
   int randomNumber = 1 + random.nextInt(TotalAyah - 1);
   print("Random Ayah number: $randomNumber");
