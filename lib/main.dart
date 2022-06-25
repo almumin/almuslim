@@ -1,12 +1,7 @@
 import 'dart:io';
-import 'package:adhan/adhan.dart';
-import 'package:almuslim/extensions/string.dart';
-import 'package:almuslim/models/app-context.dart';
 import 'package:almuslim/modules/background-tasks.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
-import 'package:almuslim/screens/prayer.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
@@ -18,11 +13,7 @@ import 'package:location/location.dart' as loc;
 import 'package:geocoding/geocoding.dart';
 import 'package:workmanager/workmanager.dart';
 import 'database/store.dart';
-import 'models/quran-entity.dart';
 import 'modules/notifications.dart';
-import 'objectbox.g.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:intl/intl.dart' show DateFormat, toBeginningOfSentenceCase;
 
 const hourlyScheduledTask = "hourlyScheduledTask";
 const weeklyScheduledTask = "weeklyScheduledTask";
@@ -33,27 +24,6 @@ void callbackDispatcher() async {
     switch (task) {
       case hourlyScheduledTask:
         return BackgroundTasks().runHourlyBackgroundTask(inputData);
-        /*print("pTimes.nextPrayer()");
-        print("$hourlyScheduledTask was executed. inputData = $inputData");
-
-        PrayerTimes pTimes = getPrayerTimes(
-            Coordinates(inputData["latitude"], inputData["longitude"]),
-            inputData["calculationMethod"],
-            inputData["madhab"],
-            inputData["highLatitudeRule"]);
-
-        var nextPrayerTime = pTimes.timeForPrayer(pTimes.nextPrayer());
-        var timeToNextPrayer = nextPrayerTime.difference(DateTime.now());
-        tz.initializeTimeZones();
-        print(timeToNextPrayer.inSeconds);
-        NotificationService().showScheduledNotification(
-            1,
-            toBeginningOfSentenceCase(pTimes.nextPrayer().name) +
-                " at " +
-                DateFormat('HH:mm').format(nextPrayerTime),
-            "📿 see prayer times",
-            timeToNextPrayer.inSeconds);
-        break;*/
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
         break;
