@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:adhan/adhan.dart';
 import 'package:almuslim/extensions/string.dart';
 import 'package:almuslim/models/app-context.dart';
+import 'package:almuslim/modules/background-tasks.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
 import 'package:almuslim/screens/prayer.dart';
@@ -27,11 +28,12 @@ const hourlyScheduledTask = "hourlyScheduledTask";
 const weeklyScheduledTask = "weeklyScheduledTask";
 const monthlyScheduledTask = "monthlyScheduledTask";
 
-void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
+void callbackDispatcher() async {
+  Workmanager().executeTask((task, inputData)  async{
     switch (task) {
       case hourlyScheduledTask:
-        print("pTimes.nextPrayer()");
+        return BackgroundTasks().runHourlyBackgroundTask(inputData);
+        /*print("pTimes.nextPrayer()");
         print("$hourlyScheduledTask was executed. inputData = $inputData");
 
         PrayerTimes pTimes = getPrayerTimes(
@@ -43,6 +45,7 @@ void callbackDispatcher() {
         var nextPrayerTime = pTimes.timeForPrayer(pTimes.nextPrayer());
         var timeToNextPrayer = nextPrayerTime.difference(DateTime.now());
         tz.initializeTimeZones();
+        print(timeToNextPrayer.inSeconds);
         NotificationService().showScheduledNotification(
             1,
             toBeginningOfSentenceCase(pTimes.nextPrayer().name) +
@@ -50,7 +53,7 @@ void callbackDispatcher() {
                 DateFormat('HH:mm').format(nextPrayerTime),
             "📿 see prayer times",
             timeToNextPrayer.inSeconds);
-        break;
+        break;*/
       case weeklyScheduledTask:
         print("$weeklyScheduledTask was executed. inputData = $inputData");
         break;
