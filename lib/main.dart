@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:almuslim/models/app-context-hive.dart';
 import 'package:almuslim/modules/background-tasks.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:almuslim/screens/home.dart';
@@ -92,6 +93,7 @@ Future<void> main() async {
           false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
       );
   Workmanager().cancelAll();
+  ApplicationContext appContext = ApplicationContext.fromJson(box.get("appContext"));
   Workmanager().registerPeriodicTask(
     hourlyScheduledTask,
     hourlyScheduledTask,
@@ -100,13 +102,6 @@ Future<void> main() async {
     inputData: {
       'latitude': _locationData.latitude,
       'longitude': _locationData.longitude,
-      'madhab': box.get('madhab') != null ? box.get('madhab') : defaultMadhab,
-      'highLatitudeRule': box.get('highLatitudeRule') != null
-          ? box.get('highLatitudeRule')
-          : defaulthighLatitudeRule,
-      'calculationMethod': box.get('calculationMethod') != null
-          ? box.get('calculationMethod')
-          : defaultCalculationMethod,
     },
   );
 

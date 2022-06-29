@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:almuslim/methods/populate-data.dart';
+import 'package:almuslim/models/app-context-hive.dart';
 import 'package:almuslim/screens/names-of-Allah.dart';
 import 'package:almuslim/screens/prayer.dart';
 import 'package:almuslim/screens/quran.dart';
@@ -63,8 +65,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     var ayah = widget.box.get('dailyAyah');
-
-
 
     HijriCalendar _hijriToday = new HijriCalendar.now();
     if (today == null) {

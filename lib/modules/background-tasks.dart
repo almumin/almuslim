@@ -8,7 +8,9 @@ import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 
 import '../main.dart';
+import '../models/app-context-hive.dart';
 import '../screens/prayer.dart';
+import 'constants.dart';
 import 'notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -17,16 +19,33 @@ class BackgroundTasks {
     print("pTimes.nextPrayer()");
     print("$hourlyScheduledTask was executed. inputData = $inputData");
 
-    PrayerTimes pTimes = getPrayerTimes(
-        Coordinates(inputData["latitude"], inputData["longitude"]),
-        inputData["calculationMethod"],
-        inputData["madhab"],
-        inputData["highLatitudeRule"]);
-
     Directory directory = await pathProvider.getApplicationDocumentsDirectory();
     Hive.init(directory.path);
+
     var box = await Hive.openBox("almuslim");
-    print(box.get("madhab"));
+    ApplicationContext a = ApplicationContext(
+      madhab: defaultMadhab,
+      highLatitudeRule: defaulthighLatitudeRule,
+      calculationMethod: defaultCalculationMethod
+    );
+    box.put("appContext", a.toJson());
+    ApplicationContext appContext =
+        ApplicationContext.fromJson(box.get('appContext'));
+
+    String madhab =
+        appContext.madhab != null ? appContext.madhab : defaultMadhab;
+    String highLatitudeRule = appContext.highLatitudeRule != null
+        ? appContext.highLatitudeRule
+        : defaulthighLatitudeRule;
+    String calculationMethod = appContext.calculationMethod != null
+        ? appContext.calculationMethod
+        : defaultCalculationMethod;
+
+    PrayerTimes pTimes = getPrayerTimes(
+        Coordinates(inputData["latitude"], inputData["longitude"]),
+        calculationMethod,
+        madhab,
+        highLatitudeRule);
 
     var nextPrayerTime = pTimes.timeForPrayer(pTimes.nextPrayer());
     var timeToNextPrayer = nextPrayerTime.difference(DateTime.now());
