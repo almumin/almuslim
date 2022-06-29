@@ -86,6 +86,11 @@ Future<void> main() async {
       _locationData.latitude, _locationData.longitude);
   // GEOLocation Ends
 
+  // If appContext not found in DB then set defaults
+  if (box.get('appContext') == null){
+    box.put("appContext", ApplicationContext.getDefaults().toJson());
+  }
+
   // Work manager Initialization starts here
   Workmanager().initialize(
       callbackDispatcher, // The top level function, aka callbackDispatcher
@@ -93,7 +98,6 @@ Future<void> main() async {
           false // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
       );
   Workmanager().cancelAll();
-  ApplicationContext appContext = ApplicationContext.fromJson(box.get("appContext"));
   Workmanager().registerPeriodicTask(
     hourlyScheduledTask,
     hourlyScheduledTask,

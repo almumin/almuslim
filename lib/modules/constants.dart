@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 const Color baseGreenColor = Color(0XFF50bb64);
 const String defaultCalculationMethod = 'north_america';
 final String defaultMadhab = Madhab.shafi.toString();
-final String defaulthighLatitudeRule = HighLatitudeRule.twilight_angle.name;
+final String defaultHighLatitudeRule = HighLatitudeRule.twilight_angle.name;
+const String defaultLanguage = 'en';
+const String defaultTheme = 'lightTheme';
 
 const themeSet = {
   'lightTheme': {

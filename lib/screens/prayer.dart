@@ -27,7 +27,7 @@ class Prayer extends StatelessWidget {
     var madhab = box.get('madhab');
     print(madhab);
     if (box.get('highLatitudeRule') == null) {
-      box.put('highLatitudeRule', defaulthighLatitudeRule);
+      box.put('highLatitudeRule', defaultHighLatitudeRule);
     }
     var highLatitudeRule = box.get('highLatitudeRule');
     print(highLatitudeRule);

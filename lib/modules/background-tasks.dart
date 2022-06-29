@@ -23,20 +23,15 @@ class BackgroundTasks {
     Hive.init(directory.path);
 
     var box = await Hive.openBox("almuslim");
-    ApplicationContext a = ApplicationContext(
-      madhab: defaultMadhab,
-      highLatitudeRule: defaulthighLatitudeRule,
-      calculationMethod: defaultCalculationMethod
-    );
-    box.put("appContext", a.toJson());
+
     ApplicationContext appContext =
         ApplicationContext.fromJson(box.get('appContext'));
-
+    print(appContext.toJson());
     String madhab =
         appContext.madhab != null ? appContext.madhab : defaultMadhab;
     String highLatitudeRule = appContext.highLatitudeRule != null
         ? appContext.highLatitudeRule
-        : defaulthighLatitudeRule;
+        : defaultHighLatitudeRule;
     String calculationMethod = appContext.calculationMethod != null
         ? appContext.calculationMethod
         : defaultCalculationMethod;
