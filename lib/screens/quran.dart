@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 
 import '../database/store.dart' as ob;
+import '../models/app-context-hive.dart';
 import '../modules/constants.dart';
 
 class QuranHome extends StatefulWidget {
@@ -36,7 +37,7 @@ class _QuranHomeState extends State<QuranHome>
 
   @override
   Widget build(BuildContext context) {
-    var theme = widget.box.get('theme');
+    var theme = ApplicationContext.fromJson(widget.box.get('appContext')).theme;
     return Provider<DBProvider>(
       create: (_) => DBProvider(),
       //dispose: (_, value) => value.dispose(),

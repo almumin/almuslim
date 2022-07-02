@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../database/store.dart';
+import '../models/app-context-hive.dart';
 import '../models/quran-entity.dart';
 import '../modules/constants.dart';
 
@@ -26,7 +27,7 @@ class _SurahIndividualState extends State<SurahIndividual> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = widget.box.get('theme');
+    var theme = ApplicationContext.fromJson(widget.box.get('appContext')).theme;
 
     return Provider<DBProvider>(
       create: (context) => DBProvider(),

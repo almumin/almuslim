@@ -2,6 +2,7 @@ import 'package:almuslim/database/store.dart' as ob;
 import 'package:almuslim/objectbox.g.dart';
 import 'package:flutter/material.dart';
 
+import '../models/app-context-hive.dart';
 import '../models/quran-entity.dart';
 import '../modules/constants.dart';
 import '../screens/surah-individual.dart';
@@ -32,7 +33,6 @@ class _QuranSecondaryState extends State<QuranSecondary> {
 
   @override
   Widget build(BuildContext context) {
-    // var theme = this.box.get('theme');
 
     return ListView.builder(
         addAutomaticKeepAlives: true,

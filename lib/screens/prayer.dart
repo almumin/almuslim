@@ -6,6 +6,8 @@ import 'package:hive/hive.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart' as geo;
 
+import '../models/app-context-hive.dart';
+
 class Prayer extends StatelessWidget {
   final Box box;
   final LocationData locationData;
@@ -36,9 +38,8 @@ class Prayer extends StatelessWidget {
         method,
         madhab,
         highLatitudeRule);
-    print(pTimes);
-    print(pTimes);
-    var theme = this.box.get('theme');
+
+    var theme = ApplicationContext.fromJson(box.get('appContext')).theme;
     return Scaffold(
       backgroundColor: themeSet[theme]["backgroundColor"],
       appBar: AppBar(

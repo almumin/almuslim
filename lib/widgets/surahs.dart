@@ -3,6 +3,7 @@ import 'package:almuslim/screens/surah-individual.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import '../database/store.dart';
+import '../models/app-context-hive.dart';
 import '../modules/constants.dart';
 
 class SurahList extends StatelessWidget {
@@ -13,7 +14,7 @@ class SurahList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = this.box.get('theme');
+    var theme = ApplicationContext.fromJson(box.get('appContext')).theme;
 
     var surahBox = this.objectBox.store.box<Surahs>();
     final results = surahBox.getAll();

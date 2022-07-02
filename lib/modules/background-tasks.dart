@@ -27,6 +27,7 @@ class BackgroundTasks {
     ApplicationContext appContext =
         ApplicationContext.fromJson(box.get('appContext'));
     print(appContext.toJson());
+    print(ApplicationContext.fromJson(box.get('appContext')));
     String madhab =
         appContext.madhab != null ? appContext.madhab : defaultMadhab;
     String highLatitudeRule = appContext.highLatitudeRule != null

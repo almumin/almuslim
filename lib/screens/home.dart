@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    print("Migration status: " + widget.box.get("migration"));
+    print("Migration status: " + widget.box.get("migration").toString());
     InitializeApp init = new InitializeApp(widget.box, widget.objectBox);
     // widget.box.put("migration", "a"); // Start a new migration
     if (widget.box.get("migration") != "done" && widget.box.get("migration") != "ongoing") {
@@ -70,7 +70,8 @@ class _HomeViewState extends State<HomeView> {
     if (today == null) {
       today = DateTime.now();
     }
-    var theme = widget.box.get('theme');
+
+    var theme = ApplicationContext.fromJson(widget.box.get('appContext')).theme;
     return Scaffold(
         appBar: AppBar(
           title: Padding(

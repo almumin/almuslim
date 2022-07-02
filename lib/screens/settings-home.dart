@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:almuslim/widgets/settings-title.dart';
 import 'package:hive/hive.dart';
 
+import '../models/app-context-hive.dart';
+
 class SettingsHome extends StatefulWidget {
   final Box box;
 
@@ -19,7 +21,7 @@ class SettingsHome extends StatefulWidget {
 class _SettingsHomeState extends State<SettingsHome> {
   @override
   Widget build(BuildContext context) {
-    var theme = widget.box.get('theme');
+    var theme = ApplicationContext.fromJson(widget.box.get('appContext')).theme;
     return Scaffold(
         bottomNavigationBar: InkWell(
           child: Padding(
