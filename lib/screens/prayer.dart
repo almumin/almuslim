@@ -18,28 +18,20 @@ class Prayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (box.get('calculationMethod') == null) {
-      box.put('calculationMethod', defaultCalculationMethod);
+    ApplicationContext appData = ApplicationContext.fromJson(box.get('appContext'));
+    if (appData.madhab == null || appData.highLatitudeRule == null ||
+        appData.highLatitudeRule == null || appData.theme == null) {
+      ApplicationContext appDataWithUnsetDefaults = ApplicationContext.getDefaultsIfNotSet(appData.toJson());
+      box.put('appContext', appDataWithUnsetDefaults.toJson());
     }
-    var method = box.get('calculationMethod');
-
-    if (box.get('madhab') == null) {
-      box.put('madhab', defaultMadhab);
-    }
-    var madhab = box.get('madhab');
-    print(madhab);
-    if (box.get('highLatitudeRule') == null) {
-      box.put('highLatitudeRule', defaultHighLatitudeRule);
-    }
-    var highLatitudeRule = box.get('highLatitudeRule');
-    print(highLatitudeRule);
+    appData = ApplicationContext.fromJson(box.get('appContext'));
+    String theme = appData.theme;
     PrayerTimes pTimes = getPrayerTimes(
         Coordinates(locationData.latitude, locationData.longitude),
-        method,
-        madhab,
-        highLatitudeRule);
+        appData.calculationMethod,
+        appData.madhab,
+        appData.highLatitudeRule);
 
-    var theme = ApplicationContext.fromJson(box.get('appContext')).theme;
     return Scaffold(
       backgroundColor: themeSet[theme]["backgroundColor"],
       appBar: AppBar(

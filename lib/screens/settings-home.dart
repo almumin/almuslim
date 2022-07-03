@@ -135,10 +135,10 @@ class _SettingsHomeState extends State<SettingsHome> {
                                       AlertRadioButtonWithData(
                                     title: "Set language",
                                     data: {
-                                      'english': "English",
-                                      'turkish': "Turkish",
-                                      'bengali': "Bengali",
-                                      'urdu': "Urdu"
+                                      'en': "English",
+                                      'tr': "Turkish",
+                                      'bn': "Bengali",
+                                      'ur': "Urdu"
                                     },
                                     box: widget.box,
                                     dataKey: "language",

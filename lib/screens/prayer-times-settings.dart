@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../data/calculation-methods.dart';
+import '../models/app-context-hive.dart';
 import '../widgets/alert-with-data-radiobutton.dart';
 import '../widgets/settings-title.dart';
 

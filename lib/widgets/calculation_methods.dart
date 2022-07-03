@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../data/calculation-methods.dart';
+import '../models/app-context-hive.dart';
 import '../modules/constants.dart';
 
 class CalculationMethodsWidget extends StatefulWidget {
@@ -19,7 +20,7 @@ class _CalculationMethodsWidgetState extends State<CalculationMethodsWidget> {
   @override
   void initState() {
     super.initState();
-    String currentCalculationMethod = widget.box.get("calculationMethod");
+    String currentCalculationMethod = ApplicationContext.fromJson(widget.box.get("appContext")).calculationMethod;
     List<CalculationMethods> allCalculationMethods =
         CalculationMethods.getMethods();
     for (int i = 0; i < allCalculationMethods.length; i++) {

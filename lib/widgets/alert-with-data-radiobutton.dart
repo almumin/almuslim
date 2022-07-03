@@ -1,3 +1,4 @@
+import 'package:almuslim/models/app-context-hive.dart';
 import 'package:almuslim/modules/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -21,7 +22,9 @@ class _AlertRadioButtonWithDataState extends State<AlertRadioButtonWithData> {
 
   @override
   Widget build(BuildContext context) {
-    _currentValue = widget.box.get(widget.dataKey);
+    // ApplicationContext.setValue(widget.box.get("appContext"), "madhab", "something")
+    _currentValue = ApplicationContext.fromJson(widget.box.get("appContext")).toMap()[widget.dataKey];
+    print(widget.box.get("appContext"));
     return AlertDialog(
       title: Text(widget.title),
       content: SingleChildScrollView(
@@ -40,7 +43,8 @@ class _AlertRadioButtonWithDataState extends State<AlertRadioButtonWithData> {
                 onChanged: (String value) {
                   setState(() {
                     _currentValue = value;
-                    widget.box.put(widget.dataKey, _currentValue);
+                    ApplicationContext data = ApplicationContext.setValue(widget.box.get("appContext"), widget.dataKey, _currentValue);
+                    widget.box.put("appContext", data.toJson());
                   });
                 },
               ),

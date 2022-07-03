@@ -38,6 +38,12 @@ class ApplicationContext {
         "prayerNotifications": prayerNotifications
       };
 
+  factory ApplicationContext.setValue(String json, String key, dynamic value) {
+    var appData = ApplicationContext.fromJson(json).toMap();
+    appData[key] = value;
+    return ApplicationContext.fromMap(appData);
+  }
+
   factory ApplicationContext.fromJson(String data) {
     Map valueMap = json.decode(data);
     return ApplicationContext.fromMap(valueMap);
