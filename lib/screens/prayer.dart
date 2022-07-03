@@ -18,10 +18,14 @@ class Prayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApplicationContext appData = ApplicationContext.fromJson(box.get('appContext'));
-    if (appData.madhab == null || appData.highLatitudeRule == null ||
-        appData.highLatitudeRule == null || appData.theme == null) {
-      ApplicationContext appDataWithUnsetDefaults = ApplicationContext.getDefaultsIfNotSet(appData.toJson());
+    ApplicationContext appData =
+        ApplicationContext.fromJson(box.get('appContext'));
+    if (appData.madhab == null ||
+        appData.highLatitudeRule == null ||
+        appData.highLatitudeRule == null ||
+        appData.theme == null) {
+      ApplicationContext appDataWithUnsetDefaults =
+          ApplicationContext.getDefaultsIfNotSet(appData.toJson());
       box.put('appContext', appDataWithUnsetDefaults.toJson());
     }
     appData = ApplicationContext.fromJson(box.get('appContext'));
@@ -86,8 +90,8 @@ class Prayer extends StatelessWidget {
   }
 }
 
-PrayerTimes getPrayerTimes(
-    Coordinates myCoordinates, String calculationMethod, String madhab, String highLatitudeRule) {
+PrayerTimes getPrayerTimes(Coordinates myCoordinates, String calculationMethod,
+    String madhab, String highLatitudeRule) {
   CalculationParameters params =
       CalculationMethod.values.byName(calculationMethod).getParameters();
   // add angle based method
