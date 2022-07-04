@@ -61,6 +61,9 @@ class ApplicationContext {
     if (appContext.madhab == null) {
       appContext.madhab = defaultMadhab;
     }
+    if (appContext.theme == null) {
+      appContext.theme = defaultTheme;
+    }
     return appContext;
   }
 
